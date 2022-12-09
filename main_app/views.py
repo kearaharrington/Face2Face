@@ -19,8 +19,7 @@ def index(request):
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
-    cats = Cat.objects.filter(user=user)
-    return render(request, 'profile.html', {'username': username, 'cats': cats})
+    return render(request, 'profile.html', {'username': username})
 
 def login_view(request):
      # if post, then authenticate (user submitted username and password)
