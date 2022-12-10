@@ -16,6 +16,12 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     return render(request, 'index.html')
 
+def lobby(request):
+    return render(request, 'group/lobby.html')
+
+def room(request):
+    return render(request, 'group/room.html')
+
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)

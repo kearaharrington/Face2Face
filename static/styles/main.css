@@ -1,0 +1,10 @@
+
+body{
+    background-color: gray;
+}
+
+#logo{
+    display: block;
+    width: 100px;
+    margin: 0 auto;
+}
