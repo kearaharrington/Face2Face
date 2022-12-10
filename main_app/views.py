@@ -10,7 +10,9 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.decorators import login_required
 # Add LoginForm to this line...
 # ...and add the following line...
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
+from .models import Participant, Group, Video_Chat, Message
+
 # Create your views here.
 
 def index(request):
