@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 # Add LoginForm to this line...
 # ...and add the following line...
 from django.contrib.auth import authenticate, login, logout
+from .models import Participant, Group, Message, Video_Chat
+
 # Create your views here.
 
 def index(request):
@@ -57,3 +59,8 @@ def signup_view(request):
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
+
+@method_decorator(login_required, name='dispatch')
+class GroupDelete(DeleteView):
+  model = Group
+  success_url = '/'
