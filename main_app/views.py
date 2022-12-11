@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
+from .models import Group, Participant, Message, Video_Chat
 # Add LoginForm to this line...
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 # ...and add the following line...
@@ -63,3 +64,7 @@ def signup_view(request):
     else:
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
+
+def chat_room(request):
+    rooms = list(Group.objects.all())
+    return render(request, 'chat/room.html', {'rooms': rooms})

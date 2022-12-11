@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+{% block content %}
+
+{% for room in rooms %}
+    <div class="card text-center">
+        <div class="card-body">
+            <h5 class="card-title">{{ room }}</h5>
+           
+            </p>
+        </div>
+    </div>
+{% endfor %}
+
+{% endblock %}
