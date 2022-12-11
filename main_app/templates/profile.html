@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>{{ username }}'s Profile:</h1>
+
+{% for group in groups %}
+<a href="/group/{{ group.id }}">
+  <h3>{{ group.topic }}</h3>
+</a>
+
+{% endfor %}
+
+{% endblock %}

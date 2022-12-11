@@ -26,8 +26,10 @@ def room(request):
 
 @login_required
 def profile(request, username):
-    user = User.objects.get(username=username)
-    return render(request, 'profile.html', {'username': username})
+    current_user = request.user
+    participant = Participant.objects.get(user=current_user.id)
+    groups = Group.objects.filter(members=participant)
+    return render(request, 'profile.html', {'username': username, 'groups': groups})
 
 def login_view(request):
      # if post, then authenticate (user submitted username and password)
