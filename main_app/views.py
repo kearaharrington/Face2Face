@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-from main_app.models import Room, Message
+from main_app.models import Group, Message
 
 # Add LoginForm to this line...
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -17,6 +17,12 @@ from django.contrib.auth import authenticate, login, logout
 
 def index(request):
     return render(request, 'index.html')
+
+def lobby(request):
+    return render(request, 'group/lobby.html')
+
+def room(request):
+    return render(request, 'group/room.html')
 
 @login_required
 def profile(request, username):
@@ -63,37 +69,40 @@ def signup_view(request):
 def home(request):
     return render(request, 'home.html')
 
-def room(request, room):
+def chatroom(request, chatroom):
     username = request.GET.get('username')
-    room_details = Room.objects.get(name=room)
-    return render(request, 'room.html', {
+    room_details = Group.objects.get(topic=chatroom)
+    return render(request, 'chatroom.html', {
         'username': username,
-        'room': room,
+        'chatroom': chatroom,
         'room_details': room_details
     })
 
+@login_required
 def checkview(request):
-    room = request.POST['room_name']
-    username = request.POST['username']
+    chatroom = request.POST['group_topic']
+    creator = request.user
 
-    if Room.objects.filter(name=room).exists():
-        return redirect('/'+room+'/?username='+username)
+    if Group.objects.filter(topic=chatroom).exists():
+        return redirect('/'+chatroom+'/?creator='+creator.username)
     else:
-        new_room = Room.objects.create(name=room)
+        new_room = Group.objects.create(topic=chatroom, creator=creator)
         new_room.save()
-        return redirect('/'+room+'/?username='+username)
+        return redirect('/'+chatroom +'/?creator='+creator.username)
 
-def send(request):
-    message = request.POST['message']
-    username = request.POST['username']
-    room_id = request.POST['room_id']
+class send(CreateView):
+  model = Message
+  fields = '__all__'
+  success_url = '/'
 
-    new_message = Message.objects.create(value=message, user=username, room=room_id)
-    new_message.save()
-    return HttpResponse('Message sent successfully')
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.sender = self.request.user
+    self.object.save()
+    return HttpResponseRedirect('/')
 
-def getMessages(request, room):
-    room_details = Room.objects.get(name=room)
+def getMessages(request, chatroom):
+    room_details = Group.objects.get(topic=chatroom)
 
-    messages = Message.objects.filter(room=room_details.id)
+    messages = Message.objects.filter(group=chatroom)
     return JsonResponse({"messages":list(messages.values())})
