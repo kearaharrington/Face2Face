@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-from main_app.models import Group, Message
+from main_app.models import Chatroom, Message
 
 # Add LoginForm to this line...
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -69,40 +69,50 @@ def signup_view(request):
 def home(request):
     return render(request, 'home.html')
 
+@login_required
 def chatroom(request, chatroom):
-    username = request.GET.get('username')
-    room_details = Group.objects.get(topic=chatroom)
-    return render(request, 'chatroom.html', {
-        'username': username,
+    user = request.user
+    chatroom = Chatroom.objects.get(name=chatroom)
+    return render(request, 'main_app/message_form.html', {
+        'user': user,
         'chatroom': chatroom,
-        'room_details': room_details
     })
 
 @login_required
-def checkview(request):
-    chatroom = request.POST['group_topic']
-    creator = request.user
+def CreateChatroom(request):
+    if request.method == 'POST': 
+        chatroom = request.POST['chatroom']
+        creator = request.user
+        print('THIS IS CHATROOM!!', chatroom)
+        if Chatroom.objects.filter(name=chatroom).exists():
+            return redirect(f'/message/{chatroom}/create')
+        else:
+            new_room = Chatroom.objects.create(name=chatroom, creator=creator)
+            new_room.save()
+            return redirect(f'/message/{chatroom}/create')
+    else: 
+        return render(request, 'index.html')
 
-    if Group.objects.filter(topic=chatroom).exists():
-        return redirect('/'+chatroom+'/?creator='+creator.username)
-    else:
-        new_room = Group.objects.create(topic=chatroom, creator=creator)
-        new_room.save()
-        return redirect('/'+chatroom +'/?creator='+creator.username)
-
-class send(CreateView):
+# @login_required
+class CreateMessage(CreateView):
   model = Message
-  fields = '__all__'
-  success_url = '/'
+  fields = ['text']
 
   def form_valid(self, form):
+    form.cleaned_data['sender'] = 
+    # chatroom_id = form.cleaned_data['chatroom_id']
+    # chatroom_name = form.cleaned_data['chatroom_name']
+    print('THIS IS CHATROOM_name!!', form.cleaned_data)
+
     self.object = form.save(commit=False)
-    self.object.sender = self.request.user
+    # self.object.sender = int(sender)
+    # self.object.chatroom = int(chatroom_id)
     self.object.save()
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(f'/chatroom/create')
 
+@login_required
 def getMessages(request, chatroom):
-    room_details = Group.objects.get(topic=chatroom)
+    room_details = Chatroom.objects.get(name=chatroom)
 
-    messages = Message.objects.filter(group=chatroom)
+    messages = Message.objects.filter(chatroom=room_details.id)
     return JsonResponse({"messages":list(messages.values())})
