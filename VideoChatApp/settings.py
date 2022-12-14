@@ -84,7 +84,7 @@ WSGI_APPLICATION = "VideoChatApp.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "face2facedb",
+        "NAME": "face2face_db",
     }
 }
 
