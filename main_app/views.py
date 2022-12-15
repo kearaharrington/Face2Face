@@ -93,22 +93,43 @@ def CreateChatroom(request):
     else: 
         return render(request, 'index.html')
 
+@login_required
+def CreateMessage(request, chatroom):
+    if request.method == 'POST': 
+        # user_id = int(request.POST['user_id'])
+        # chatroom_id = int(request.POST['chatroom_id'])
+        # print('user id here!', request.user, 'chatroom id here!', chatroom_id)
+        text = request.POST['text']
+        chatroom_name = request.POST['chatroom_name']
+
+        chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
+        new_message = Message.objects.create(sender=request.user, chatroom=chatroom, text=text)
+        print('THIS IS a new Message!!!', new_message.sender)
+        new_message.save()
+        return redirect(f'/getMessages/{chatroom_name}')
+    else: 
+        user = request.user
+        print('printing CHATROOM 1', chatroom)
+        chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
+        print('printing CHATROOM', chatroom)
+        return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+
 # @login_required
-class CreateMessage(CreateView):
-  model = Message
-  fields = ['text']
+# class CreateMessage(CreateView):
+#   model = Message
+#   fields = ['text']
 
-  def form_valid(self, form):
-    form.cleaned_data['sender'] = 
-    # chatroom_id = form.cleaned_data['chatroom_id']
-    # chatroom_name = form.cleaned_data['chatroom_name']
-    print('THIS IS CHATROOM_name!!', form.cleaned_data)
+#   def form_valid(self, form):
+#     form.cleaned_data['sender'] = True
+#     # chatroom_id = form.cleaned_data['chatroom_id']
+#     # chatroom_name = form.cleaned_data['chatroom_name']
+#     print('THIS IS CHATROOM_name!!', form.cleaned_data)
 
-    self.object = form.save(commit=False)
-    # self.object.sender = int(sender)
-    # self.object.chatroom = int(chatroom_id)
-    self.object.save()
-    return HttpResponseRedirect(f'/chatroom/create')
+#     self.object = form.save(commit=False)
+#     # self.object.sender = int(sender)
+#     # self.object.chatroom = int(chatroom_id)
+#     self.object.save()
+#     return HttpResponseRedirect(f'/chatroom/create')
 
 @login_required
 def getMessages(request, chatroom):

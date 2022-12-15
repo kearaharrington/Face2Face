@@ -21,6 +21,8 @@ class Message(models.Model):
     text = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self):
+        return self.text
     
 class Video_Chat(models.Model):
     participants = models.ManyToManyField(Participant)
