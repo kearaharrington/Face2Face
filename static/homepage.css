@@ -5,15 +5,26 @@ body {
 }
 
 .home-title  h1{
-    color:blue;
+    display: inline;
+    color:rgb(3, 3, 10);
     font-size: 60px;
 }
+
+.home-title :hover{
+    color:orange
+}
+
 
 .home-links {
     background-color: rgba(255, 0, 0, 0.231);
     width: 150px;
     justify-content: center;
     align-items: center;
+}
+
+.home-links :hover {
+    background-color: rgb(43, 162, 226);
+    color: white;
 }
 
 .home-btn-div {
@@ -23,5 +34,13 @@ body {
 .btn {
     background-color: darkcyan;
     color: white;
+}
+
+.logo {
+    background-image: url(../static/imgs/f2f-transparent.png);
+    background-position: center;
+    background-size:cover;
+    width: 500px;
+    height: 300px;
 }
 
