@@ -75,6 +75,9 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def contact(request):
+    return render(request, 'contact.html')
+
 @login_required
 def chatroom(request, chatroom):
     user = request.user
