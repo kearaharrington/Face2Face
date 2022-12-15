@@ -4,12 +4,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 from main_app.models import Chatroom, Message
 
-=======
-from .models import Group, Participant, Message, Video_Chat
->>>>>>> a864f48 (add chat folder and room.html, create url and view)
 # Add LoginForm to this line...
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 # ...and add the following line...
@@ -70,7 +66,6 @@ def signup_view(request):
         form = UserCreationForm()
         return render(request, 'signup.html', {'form': form})
 
-<<<<<<< HEAD
 def home(request):
     return render(request, 'home.html')
 
@@ -119,22 +114,7 @@ def CreateMessage(request, chatroom):
         print('printing CHATROOM', chatroom)
         return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
 
-# @login_required
-# class CreateMessage(CreateView):
-#   model = Message
-#   fields = ['text']
 
-#   def form_valid(self, form):
-#     form.cleaned_data['sender'] = True
-#     # chatroom_id = form.cleaned_data['chatroom_id']
-#     # chatroom_name = form.cleaned_data['chatroom_name']
-#     print('THIS IS CHATROOM_name!!', form.cleaned_data)
-
-#     self.object = form.save(commit=False)
-#     # self.object.sender = int(sender)
-#     # self.object.chatroom = int(chatroom_id)
-#     self.object.save()
-#     return HttpResponseRedirect(f'/chatroom/create')
 
 @login_required
 def getMessages(request, chatroom):
@@ -142,8 +122,3 @@ def getMessages(request, chatroom):
 
     messages = Message.objects.filter(chatroom=room_details.id)
     return JsonResponse({"messages":list(messages.values())})
-=======
-def chat_room(request):
-    rooms = list(Group.objects.all())
-    return render(request, 'chat/room.html', {'rooms': rooms})
->>>>>>> a864f48 (add chat folder and room.html, create url and view)

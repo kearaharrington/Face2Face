@@ -84,14 +84,9 @@ WSGI_APPLICATION = "VideoChatApp.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-<<<<<<< HEAD
         "NAME": "face2face_db",
-        "HOST": "localhost",
-        "USER": "postgres",
-        "PASSWORD": "gk1126"
-=======
-        "NAME": "face2facedb",
->>>>>>> a864f48 (add chat folder and room.html, create url and view)
+
+
     }
 }
 
