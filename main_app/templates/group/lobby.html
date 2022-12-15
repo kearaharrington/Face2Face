@@ -10,7 +10,22 @@
         <p>A group video calling application, that you can use with all your friends</p>
 
     </div>
+
+    <form id="form">
+        <div class="form-fielf">
+            <input type="submit" value="Join Stream">
+        </div>
+    </form>
 </section>
+<script type="text/javascript">
+    let form = document.getElementById("form")
+
+    let handleSubmit = async (e) => {
+        e.preventDefault()
+        window.open('/room/', '_self')
+    }
+    form.addEventListener('submit', handleSubmit)
+</script>
 
 </main>
 
