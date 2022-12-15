@@ -1,0 +1,11 @@
+body {
+    /* background-image: url(../static/imgs/f2f.png);
+    background-image: url(../static/imgs/f2f.png); */
+    background-image: url(../static/imgs/Bground.png);
+}
+
+.home-title  h1{
+    color:blue;
+    font-size: 60px;
+}
+
