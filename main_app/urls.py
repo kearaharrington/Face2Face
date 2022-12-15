@@ -13,7 +13,6 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('signup/', views.signup_view, name='signup'),
     path('group/', views.chatroom, name='chat_room'),
-        path('', views.index, name='index'),
     path('room/', views.room),
     path('lobby/', views.lobby),
 ]
