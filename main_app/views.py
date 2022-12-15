@@ -72,6 +72,12 @@ def signup_view(request):
 def home(request):
     return render(request, 'home.html')
 
+def about(request):
+    return render(request, 'about.html')
+
+def contact(request):
+    return render(request, 'contact.html')
+
 @login_required
 def chatroom(request, chatroom):
     user = request.user
