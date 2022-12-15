@@ -9,3 +9,19 @@ body {
     font-size: 60px;
 }
 
+.home-links {
+    background-color: rgba(255, 0, 0, 0.231);
+    width: 150px;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-btn-div {
+    padding: 5px;
+}
+
+.btn {
+    background-color: darkcyan;
+    color: white;
+}
+
