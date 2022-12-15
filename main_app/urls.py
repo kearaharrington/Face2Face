@@ -12,6 +12,6 @@ urlpatterns = [
     path('accounts/login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('signup/', views.signup_view, name='signup'),
-    path('group/', views.chat_room, name='chat_room'),
+    path('group/', views.chatroom, name='chat_room'),
 ]
 
