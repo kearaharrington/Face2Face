@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('chatroom/create/', views.CreateChatroom, name='create_chatroom'),
+    path('chatroom/create/', views.CreateChatroom, name='createChatroom'),
     # path('chatroom/<str:chatroom>/', views.chatroom, name='chatroom'),
     path('message/<str:chatroom>/create/', views.CreateMessage, name='create_message'),
     path('getMessages/<str:chatroom>/', views.getMessages, name='getMessages'),

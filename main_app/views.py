@@ -18,6 +18,9 @@ from django.contrib.auth import authenticate, login, logout
 def index(request):
     return render(request, 'index.html')
 
+def create_chatroom(request):
+    return render(request, 'createChatroom.html')
+
 def lobby(request):
     return render(request, 'group/lobby.html')
 
@@ -91,7 +94,7 @@ def CreateChatroom(request):
             new_room.save()
             return redirect(f'/message/{chatroom}/create')
     else: 
-        return render(request, 'index.html')
+        return render(request, 'createChatroom.html')
 
 @login_required
 def CreateMessage(request, chatroom):
