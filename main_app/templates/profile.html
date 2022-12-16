@@ -2,13 +2,14 @@
 {% load static %}
 
 {% block content %}
-
-<h1>{{ username }}'s chatrooms:</h1>
-
-{% for chatroom in chatrooms %}
-<a href="/getMessages/{{ chatroom.name }}">
-  <h3>{{ chatroom.name }}</h3>
-</a>
+<div class='profile__chatrooms' align='center'>
+  <h1>{{ username }}'s chatrooms:</h1>
+  
+  {% for chatroom in chatrooms %}
+  <a href="/getMessages/{{ chatroom.name }}">
+    <h3>{{ chatroom.name }}</h3>
+  </a>
+</div>
 
 {% endfor %}
 
