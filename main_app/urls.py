@@ -7,6 +7,7 @@ urlpatterns = [
     # path('chatroom/<str:chatroom>/', views.chatroom, name='chatroom'),
     path('message/<str:chatroom>/create/', views.CreateMessage, name='create_message'),
     path('getMessages/<str:chatroom>/', views.getMessages, name='getMessages'),
+    path('user/<username>', views.profile, name='profile'),
     
     # path('lobby/', views.lobby),
     path('accounts/login/', views.login_view, name='login'),

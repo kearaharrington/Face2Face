@@ -11,7 +11,7 @@ body {
 }
 
 .home-title :hover{
-    color:orange
+    color:orange;
 }
 
 
@@ -23,9 +23,13 @@ body {
 }
 
 .home-links :hover {
-    background-color: rgb(43, 162, 226);
+    background-color: rgb(2, 191, 201);
     color: white;
 }
+
+/* .home-links :hover, .home-title :hover{
+    color: rgb(255, 255, 255);
+} */
 
 .home-btn-div {
     padding: 5px;

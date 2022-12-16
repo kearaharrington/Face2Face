@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel='stylesheet' href='../static/homepage.css'>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
 
 <div class='home-title' align="center">
   <div class='logo'></div>
-  <h1> Home Page!</h1>
-</div>
-<div class='home-links'>
-  <div class='home-btn-div'>
-    <a href='/' class='btn1'> Profile </a>
+    <h1> Home Page!</h1>
   </div>
-  <div class='home-btn-div'>
-    <a href='/chatroom/create' class='btn1'> Create Chatroom </a>
-  </div>
-  <div class='home-btn-div'>
-    <a href='/room' class='btn1'> Video Chat </a>
-  </div>
-  <div class='home-btn-div'>
-    <a href='/about' class='btn1'> About </a>
-  </div>
-  <div class='home-btn-div'>
-    <a href='/contact' class='btn1'> Contact </a>
-  </div>
-</div>
 
-</body>
-
-
-</html>
+{% endblock %}
