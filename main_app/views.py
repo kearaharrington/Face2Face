@@ -131,3 +131,9 @@ def getMessages(request, chatroom):
 
     messages = Message.objects.filter(chatroom=room_details.id)
     return JsonResponse({"messages":list(messages.values())})
+
+@login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    chatrooms = Chatroom.objects.filter(creator=user)
+    return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms})
