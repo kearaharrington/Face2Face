@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>{{ username }}'s chatrooms:</h1>
+
+{% for chatroom in chatrooms %}
+<a href="/getMessages/{{ chatroom.name }}">
+  <h3>{{ chatroom.name }}</h3>
+</a>
+
+{% endfor %}
+
+{% endblock %}

@@ -30,7 +30,8 @@ def room(request):
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
-    return render(request, 'profile.html', {'username': username})
+    chatrooms = Chatroom.objects.filter(creator=user)
+    return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms})
 
 def login_view(request):
      # if post, then authenticate (user submitted username and password)
