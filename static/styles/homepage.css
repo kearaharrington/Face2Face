@@ -15,13 +15,26 @@ body {
 
 .home-links {
     display: flex;
-    background-color: rgba(255, 0, 0, 0.231);
+    background-color: rgba(25, 0, 255, 0.231);
     justify-content: center;
     align-items: center;
 }
 
-.profile__chatrooms a {
+a {
+    text-decoration: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 20px;
+}
+
+a:hover {
+    background-color: rgb(38, 30, 254);
     color: white;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.profile__chatrooms a {
+    color: rgb(0, 0, 0);
 }
 
 
@@ -29,10 +42,10 @@ body {
     padding: 5px;
 }
 
-.btn {
-    background-color: darkcyan;
-    color: white;
+.btn1 {
+    color: rgb(0, 0, 0);
 }
+
 
 .logo {
     background-image: url(../../static/imgs/f2f-transparent.png);
