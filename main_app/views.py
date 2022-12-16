@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
-from main_app.models import Chatroom, Message
+from main_app.models import Chatroom, Message, Participant
 
 # Add LoginForm to this line...
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -30,8 +30,13 @@ def room(request):
 @login_required
 def profile(request, username):
     user = User.objects.get(username=username)
+    user_id = request.user.id
+    member = Participant.objects.get(user_id=user_id)
+    # print("USER", user)
     chatrooms = Chatroom.objects.filter(creator=user)
-    return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms})
+    memberships = member.chatroom_set.all()
+    print("PARTICIPANT", memberships, "user id", user_id)
+    return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms, 'memberships': memberships})
 
 def login_view(request):
      # if post, then authenticate (user submitted username and password)
@@ -106,17 +111,20 @@ def CreateChatroom(request):
 @login_required
 def CreateMessage(request, chatroom):
     if request.method == 'POST': 
-        # user_id = int(request.POST['user_id'])
-        # chatroom_id = int(request.POST['chatroom_id'])
-        # print('user id here!', request.user, 'chatroom id here!', chatroom_id)
         text = request.POST['text']
         chatroom_name = request.POST['chatroom_name']
-
         chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
         new_message = Message.objects.create(sender=request.user, chatroom=chatroom, text=text)
         print('THIS IS a new Message!!!', new_message.sender)
         new_message.save()
-        return redirect(f'/getMessages/{chatroom_name}')
+        if new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
+            new_member = Participant.objects.create(user=request.user)
+            new_member.save()
+            chatroom.members.add(new_member)
+            return redirect(f'/{chatroom_name}')
+        else:
+            # return redirect(f'/getMessages/{chatroom_name}')
+            return redirect('/')
     else: 
         user = request.user
         print('printing CHATROOM 1', chatroom)
@@ -124,11 +132,11 @@ def CreateMessage(request, chatroom):
         print('printing CHATROOM', chatroom)
         return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
 
-
-
 @login_required
 def getMessages(request, chatroom):
     room_details = Chatroom.objects.get(name=chatroom)
-
     messages = Message.objects.filter(chatroom=room_details.id)
+    # users = User.objects.get()
+    # print('this is users!!!!', users)
     return JsonResponse({"messages":list(messages.values())})
+    # return render(request, 'main_app/message_form.html', {'messages': messages})
