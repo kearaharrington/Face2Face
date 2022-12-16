@@ -1,0 +1,44 @@
+body {
+    background-image: url(../../static/imgs/Bground.png);
+}
+
+.home-title {
+    display: inline;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+}
+
+.home-title :hover{
+    color: orange;
+}
+
+
+.home-links {
+    display: flex;
+    background-color: rgba(255, 0, 0, 0.231);
+    justify-content: center;
+    align-items: center;
+}
+
+.profile__chatrooms a {
+    color: white;
+}
+
+
+.home-btn-div {
+    padding: 5px;
+}
+
+.btn {
+    background-color: darkcyan;
+    color: white;
+}
+
+.logo {
+    background-image: url(../../static/imgs/f2f-transparent.png);
+    background-position: center;
+    background-size:cover;
+    width: 500px;
+    height: 300px;
+} 
+

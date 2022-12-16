@@ -6,39 +6,62 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Face2Face</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/main.css' %}">
+    {% comment %} <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/main.css' %}"> {% endcomment %}
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static '/styles/homepage.css' %}">
+    {% comment %} <link rel='stylesheet' type='text/css' href='../static/styles/main.css'> {% endcomment %}
     <script src="{% static 'js/main.js' %}"></script>
 </head>
 <body>
-    
+  {% comment %} <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="/cats">View All Cats</a></li>
+      <li class="breadcrumb-item active" aria-current="page"><a href="/cats/create">Create Cat</a></li>
+    {% if user.is_authenticated %}
+        <li class="breadcrumb-item active" aria-current="page"><a href="/user/{{user}}">{{user}}'s Profile</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'logout' %}">Logout</a></li>
+    {% else %}
+        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'login' %}">Login</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'signup' %}">Signup</a></li>
+    {% endif %}
+    </ol>
+  </nav> 
+     {% endcomment %}
+     <div class='home-links'>
+        <div class='home-btn-div'>
+          <a href='/' class='btn1'> Home </a>
+        </div>
+         <div class='home-btn-div'>
+           <a href='/chatroom/create' class='btn1'> Create Chatroom </a>
+         </div>
+         <div class='home-btn-div'>
+           <a href='/room' class='btn1'> Video Chat </a>
+         </div>
+         <div class='home-btn-div'>
+           <a href='/about' class='btn1'> About </a>
+         </div>
+         <div class='home-btn-div'>
+           <a href='/contact' class='btn1'> Contact </a>
+         </div>
+         {% if request.user.is_authenticated %}
+          <div class='home-btn-div'>
+           <a href='/user/{{request.user.username}}' class='btn1'> Profile </a>
+          </div>
+          <div class='home-btn-div'>
+           <a href='/logout' class='btn1'>Logout</a>
+          </div>
+        {% else %}
+         <div class='home-btn-div'>
+           <a href='/accounts/login'>Login</a>
+         </div>
+         <div class='home-btn-div'>
+           <a href='/signup' class='btn1'> Signup </a>
+         </div>
+       {% endif %}
+       </div>
     {% block content %}
     
     {% endblock content %}
-    <div class='home-links'>
-        <div class='home-btn-div'>
-            {% if request.user.is_authenticated %}
-                <a href='/user/{{request.user.username}}' class='btn1'> Profile </a>
-                <a href='/logout' class='btn1'>Logout</a>
-            {% else %}
-                <a href='/accounts/login'>Login</a>
-            {% endif %}
-        </div>
-        <div class='home-btn-div'>
-          <a href='/chatroom/create' class='btn1'> Create Chatroom </a>
-        </div>
-        <div class='home-btn-div'>
-          <a href='/room' class='btn1'> Video Chat </a>
-        </div>
-        <div class='home-btn-div'>
-          <a href='/about' class='btn1'> About </a>
-        </div>
-        <div class='home-btn-div'>
-          <a href='/contact' class='btn1'> Contact </a>
-        </div>
-        <div class='home-btn-div'>
-            <a href='/' class='btn1'> Home </a>
-          </div>
-      </div>
 </body>
 <!-- <script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.8.0.js' %}"></script> -->
 
