@@ -2,21 +2,27 @@
 {% load static %}
 
 {% block content %}
+<div class='profile'>
+  <h1>Welcome</h1>
 
-<div class='profile__chatrooms' align='center'>
-    <h1>{{ username }}'s chatrooms:</h1>
-
-    {% for chatroom in chatrooms %}
-    <a href="/getMessages/{{ chatroom.name }}">
-        <h3>{{ chatroom.name }}</h3>
-    </a>
-    {% endfor %}
-
-    {% for membership in memberships %}
-    <a href="/getMessages/{{ membership.name }}">
-        <h3>{{ membership.name }}</h3>
-    </a>
-    {% endfor %}
 </div>
+<div class='profile__rooms' align='center'>
+  <h1>{{ username }}'s chatrooms:</h1>
+</div>
+  {% for chatroom in chatrooms %}
+  <div class='chatroom__container'>
+    <div class='each__chatroom'>
+      <a class='chatroom__btn' href="/getMessages/{{ chatroom.name }}">
+        <h3>{{ chatroom.name }}</h3>
+      </a>
+    </div>
+  </div>
+
+{% endfor %}
+{% for membership in memberships %}
+<a href="/getMessages/{{ membership.name }}">
+    <h3>{{ membership.name }}</h3>
+</a>
+{% endfor %}
 
 {% endblock %}

@@ -136,9 +136,10 @@ def CreateMessage(request, chatroom):
 
 @login_required
 def getMessages(request, chatroom):
+    
     room_details = Chatroom.objects.get(name=chatroom)
     messages = Message.objects.filter(chatroom=room_details.id)
     # users = User.objects.get()
     # print('this is users!!!!', users)
     return JsonResponse({"messages":list(messages.values())})
-    # return render(request, 'main_app/message_form.html', {'messages': messages})
+
