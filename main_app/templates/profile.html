@@ -2,16 +2,17 @@
 {% load static %}
 
 {% block content %}
-<div class='profile__chatrooms' align='center'>
+<div class='profile__rooms' align='center'>
   <h1>{{ username }}'s chatrooms:</h1>
-  
-  {% for chatroom in chatrooms %}
-  <div class='each__chatroom'>
-    <a class='chatroom__btn' href="/getMessages/{{ chatroom.name }}">
-      <h3>{{ chatroom.name }}</h3>
-    </a>
-  </div>
 </div>
+  {% for chatroom in chatrooms %}
+  <div class='chatroom__container'>
+    <div class='each__chatroom'>
+      <a class='chatroom__btn' href="/getMessages/{{ chatroom.name }}">
+        <h3>{{ chatroom.name }}</h3>
+      </a>
+    </div>
+  </div>
 
 {% endfor %}
 

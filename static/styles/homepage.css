@@ -12,30 +12,53 @@ body {
     color: orange;
 }
 
-
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+} 
 
 .home__links {
     display: flex;
     background-color: rgba(25, 0, 255, 0.231);
     justify-content: center;
     align-items: center;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-a {
+.btn1 {
     text-decoration: none;
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 20px;
 }
 
-a:hover {
+.btn1:hover {
     background-color: rgb(38, 30, 254);
     color: white;
     border: 2px solid rgb(0, 0, 0);
 }
 
-.profile__chatrooms a {
+.profile__rooms {
     color: rgb(0, 0, 0);
+    height: fit-content;
+    font-size: large;
+}
+
+.each__chatroom {
+    text-align: center;
+}
+
+.chatroom__container {
+    background-color: aqua;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
