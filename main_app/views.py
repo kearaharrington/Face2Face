@@ -117,9 +117,9 @@ def CreateChatroom(request):
 @login_required
 def CreateMessage(request, chatroom):
     user = request.user
+    chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
     if request.method == 'POST': 
         text = request.POST['text']
-        chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
         new_message = Message.objects.create(sender=user, chatroom=chatroom, text=text)
         new_message.save()
         participants = Participant.objects.all()
@@ -130,9 +130,7 @@ def CreateMessage(request, chatroom):
             new_member.save()
             chatroom.members.add(new_member)
             return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
-
     else: 
-        chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
         return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
 
 
