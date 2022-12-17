@@ -9,6 +9,7 @@ let remoteUsers = {}
 
 let joinAndDisplayLocalStream = async () => {
     client.on('user-published', handleUserJoined)
+    client.on('user-left', handleUserLeft)
 
     UID = await client.join(APP_ID, CHANNEL, TOKEN, null)
 
@@ -42,6 +43,11 @@ let handleUserJoined = async (user, mediaType) => {
     if (mediaType === 'audio'){
         user.audioTrack.play()
     }
+}
+
+let handleUserLeft = async (user) => {
+    delete remoteUsers[user.uid]
+    document.getElementById(`user-container-${user.uid}`).remove()
 }
 
 
