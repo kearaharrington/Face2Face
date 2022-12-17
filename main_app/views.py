@@ -16,6 +16,10 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def index(request):
+    if request.user.is_authenticated:
+        print("Logged in")
+    else:
+        print("Not logged in")
     return render(request, 'index.html')
 
 def create_chatroom(request):
