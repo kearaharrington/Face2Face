@@ -35,12 +35,14 @@ def room(request):
 def profile(request, username):
     user = User.objects.get(username=username)
     user_id = request.user.id
-    member = Participant.objects.get(user_id=user_id)
-    # print("USER", user)
     chatrooms = Chatroom.objects.filter(creator=user)
-    memberships = member.chatroom_set.all()
-    print("PARTICIPANT", memberships, "user id", user_id)
-    return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms, 'memberships': memberships})
+    member_exists = Participant.objects.filter(user_id=user_id)
+    if member_exists:
+        member = Participant.objects.get(user_id=user_id)
+        memberships = member.chatroom_set.all()
+        return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms, 'memberships': memberships})
+    else:
+        return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms})
 
 def login_view(request):
      # if post, then authenticate (user submitted username and password)
@@ -114,27 +116,25 @@ def CreateChatroom(request):
 
 @login_required
 def CreateMessage(request, chatroom):
+    user = request.user
     if request.method == 'POST': 
         text = request.POST['text']
-        chatroom_name = request.POST['chatroom_name']
         chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
-        new_message = Message.objects.create(sender=request.user, chatroom=chatroom, text=text)
-        print('THIS IS a new Message!!!', new_message.sender)
+        new_message = Message.objects.create(sender=user, chatroom=chatroom, text=text)
         new_message.save()
-        if new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
-            new_member = Participant.objects.create(user=request.user)
+        participants = Participant.objects.all()
+        if any(participant.user_id == user.id for participant in participants):
+            return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+        elif new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
+            new_member = Participant.objects.create(user=user)
             new_member.save()
             chatroom.members.add(new_member)
-            return redirect(f'/{chatroom_name}')
-        else:
-            # return redirect(f'/getMessages/{chatroom_name}')
-            return redirect('/')
+            return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+
     else: 
-        user = request.user
-        # print('printing CHATROOM 1', chatroom)
         chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
-        print('printing CHATROOM', chatroom)
         return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+
 
 @login_required
 def getMessages(request, chatroom):
