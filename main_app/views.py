@@ -127,7 +127,7 @@ def CreateMessage(request, chatroom):
             return redirect('/')
     else: 
         user = request.user
-        print('printing CHATROOM 1', chatroom)
+        # print('printing CHATROOM 1', chatroom)
         chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
         print('printing CHATROOM', chatroom)
         return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
