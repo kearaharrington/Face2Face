@@ -2,6 +2,10 @@
 {% load static %}
 
 {% block content %}
+<div class='profile'>
+  <h1>Welcome</h1>
+
+</div>
 <div class='profile__rooms' align='center'>
   <h1>{{ username }}'s chatrooms:</h1>
 </div>
@@ -14,6 +18,11 @@
     </div>
   </div>
 
+{% endfor %}
+{% for membership in memberships %}
+<a href="/getMessages/{{ membership.name }}">
+    <h3>{{ membership.name }}</h3>
+</a>
 {% endfor %}
 
 {% endblock %}
