@@ -1,44 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 body {
     background-image: url(../../static/imgs/Bground.png);
+    font-family: 'Poppins', sans-serif;
 }
 
-.home-title {
+.home__title {
+    font-family: 'Poppins', sans-serif;
     display: inline;
     color: rgb(0, 0, 0);
     font-size: 30px;
 }
 
-.home-title :hover{
+.home__title :hover{
     color: orange;
 }
 
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+} 
 
-.home-links {
+.home__links {
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     background-color: rgba(25, 0, 255, 0.231);
-    justify-content: center;
-    align-items: center;
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-a {
+.about__content {
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
+    text-align: center;
+}
+
+.btn1 {
     text-decoration: none;
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 20px;
 }
 
-a:hover {
+.btn1:hover {
     background-color: rgb(38, 30, 254);
     color: white;
     border: 2px solid rgb(0, 0, 0);
 }
 
-.profile__chatrooms a {
+.profile {
+    text-align: center;
+}
+
+.profile__rooms {
     color: rgb(0, 0, 0);
+    height: fit-content;
+    font-size: large;
+}
+
+.each__chatroom {
+    text-align: center;
+}
+
+.chatroom__container {
+    background-color: aqua;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 
-.home-btn-div {
+.home__button__container {
     padding: 5px;
 }
 
@@ -55,3 +94,92 @@ a:hover {
     height: 300px;
 } 
 
+
+/* ================== Media Query Medium ====================== */
+@media screen and (max-width: 1024px) {
+    a {
+        margin: 0 auto;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .about__content {
+        text-align: center;
+        width: fit-content;
+        padding: 20px;
+        margin-left: 40px;
+        margin-right: 40px;
+        
+    }
+    
+    .about__title {
+        text-align: center;
+    }
+    
+    p {
+        font-size: large;
+        font-weight: 300;
+        font-style: italic;
+    }
+    
+    .home__links {
+        background-color: transparent;
+    }
+    
+    
+    .home__button__container {
+        padding-left: 20px;
+        background-color: rgba(90, 90, 107, 0);
+        position: relative;
+        display: flex;
+        justify-content: center;
+        
+    }
+    
+    .logo {
+        margin-left: 19%;
+    } 
+}
+
+
+/* ================== Media Query small ====================== */
+@media screen and (max-width: 600px) {
+    /* a {
+        margin: 0 auto;
+        padding-left: 0;
+        padding-right: 0;
+    } */
+
+    .about__content {
+        text-align: center;
+        padding-left: 25%;
+        width: min-content;
+    
+    }
+
+    .about__title {
+        margin-left: 25%;
+    }
+    
+    p {
+        font-size: large;
+        font-weight: 300;
+        font-style: italic;
+    }
+
+    .home__links {
+        background-color: transparent;
+    }
+
+
+    .home__button__container {
+         padding-left: 20px;
+         background-color: rgba(90, 90, 107, 0);
+         position: relative;
+         display: flex;
+         justify-content: center;
+
+    }
+
+
+}

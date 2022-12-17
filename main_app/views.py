@@ -117,9 +117,12 @@ def CreateMessage(request, chatroom):
     if request.method == 'POST': 
         text = request.POST['text']
         chatroom_name = request.POST['chatroom_name']
+
+        user = request.user
         chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
         new_message = Message.objects.create(sender=request.user, chatroom=chatroom, text=text)
         print('THIS IS a new Message!!!', new_message.sender)
+
         new_message.save()
         if new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
             new_member = Participant.objects.create(user=request.user)
@@ -138,9 +141,10 @@ def CreateMessage(request, chatroom):
 
 @login_required
 def getMessages(request, chatroom):
+    
     room_details = Chatroom.objects.get(name=chatroom)
     messages = Message.objects.filter(chatroom=room_details.id)
     # users = User.objects.get()
     # print('this is users!!!!', users)
     return JsonResponse({"messages":list(messages.values())})
-    # return render(request, 'main_app/message_form.html', {'messages': messages})
+
