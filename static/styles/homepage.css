@@ -7,10 +7,18 @@ body {
 
 /* The animation code */
 @keyframes profile {
+    /* 0%   {background-color: rgb(0, 81, 255, 0.4);
+        color: rgb(250, 250, 250);
+         }
+    25%  {background-color:rgb(255, 149, 0); left:200px; top:0px;}
+    50%  {background-color:rgb(8, 5, 201); left:200px; top:200px;
+        color: rgb(255, 255, 255);}
+    75%  {background-color:orange; left:0px; top:200px;}
+    100% {background-color: rgba(255, 166, 0, 0.624)} */
     from {background-color: rgb(0, 81, 255, 0.4);}
-    to {background-color: rgb(255, 0, 255, 0.4);}
-    from {color: white;}
-    to {color: black;}
+    to {background-color:rgb(38, 30, 254);}
+    from {color: black;}
+    to {color: white;}
 }
 
 @keyframes navbar {
@@ -27,10 +35,10 @@ body {
 
 .profile {
     text-align: center;
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 0, 255, 0.4);
+    color: rgb(255, 255, 255);
+    background-color: rgb(38, 30, 254);
     animation-name: profile;
-    animation-duration: 5s;
+    animation-duration: 6s;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
@@ -57,6 +65,12 @@ body {
 
 
 /* ================ End of animations ==================== */
+
+.contact__container {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 .home__title {
     font-family: 'Poppins', sans-serif;
@@ -213,9 +227,7 @@ body {
         margin-left: 19%;
     } 
 }
- /* ======================= video chat section ============================ */
 
- 
 
 /* ================== Media Query small ====================== */
 @media screen and (max-width: 600px) {
