@@ -5,10 +5,10 @@
 <div class='chat-create chat-enter'> 
   <form id="post-form" method="POST" action="">
       {% csrf_token %}
-      <label>Create a Chatroom or Join an Existing Chatroom</label>
+      <label class='create__chatroom__label'>Create a Chatroom or Join an Existing Chatroom</label>
       {% comment %}Need to display existing chatrooms to choose from {% endcomment %}
       <input type="text" name="chatroom" id="chatroom" width="100px" />
-      <input type="submit" value="Create Room Now">
+      <input type="submit" value="Create Room Now" class='submit__chatroom'>
   </form>
   {% for chatroom in chatrooms %}
   <div class='chatroom__container'>
