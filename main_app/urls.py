@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('chatroom/create/', views.CreateChatroom, name='createChatroom'),
+    path('<str:chatroom>/update/', views.edit_chatroom, name='edit_chatroom'),
     # path('chatroom/<str:chatroom>/', views.chatroom, name='chatroom'),
     path('message/<str:chatroom>/create/', views.CreateMessage, name='create_message'),
     path('getMessages/<str:chatroom>/', views.getMessages, name='getMessages'),

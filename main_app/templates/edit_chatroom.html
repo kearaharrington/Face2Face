@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class='chat-create chat-enter'> 
+    <form id="post-form" method="POST">
+        {% csrf_token %}
+        <label>Edit Chatroom Name</label>
+        <input type="text" name="name" id="name" width="100px" />
+        <input type="submit" value="Update">
+    </form>
+  </div>
+
+{% endblock %}
