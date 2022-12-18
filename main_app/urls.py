@@ -18,6 +18,5 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('room/', views.room),
     path('lobby/', views.lobby),
-    path('user/<username>', views.profile, name='profile'),
 ]
 

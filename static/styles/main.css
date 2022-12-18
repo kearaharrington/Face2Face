@@ -47,8 +47,23 @@ body{
 }
 
 .control-icon{
-    height: 100px;
-    width: 100px;
-    border-color: blueviolet;
-    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#controls-wrapper{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    column-gap: 1em;
+    position: fixed;
+    bottom: 20px;
+}
+
+#leave-btn{
+    background-color: rgb(255, 80, 80, 1);
 }
