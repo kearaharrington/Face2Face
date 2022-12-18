@@ -5,6 +5,59 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+/* The animation code */
+@keyframes profile {
+    from {background-color: rgb(0, 81, 255, 0.4);}
+    to {background-color: rgb(255, 0, 255, 0.4);}
+    from {color: white;}
+    to {color: black;}
+}
+
+@keyframes navbar {
+    from {background-color: transparent;}
+    to {background-color: rgba(25, 0, 255, 0.231);}
+}
+
+@keyframes links {
+    from {background-color: transparent;}
+    to {background-color: rgb(38, 30, 254)}
+    from {border: 2px solid transparent;}
+    to { border: 2px solid black;}
+}
+
+.profile {
+    text-align: center;
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 0, 255, 0.4);
+    animation-name: profile;
+    animation-duration: 5s;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+  }
+
+.home__links {
+    animation-name: navbar;
+    animation-duration: 4s;
+}
+
+.btn1:hover {
+    animation-name: links;
+    animation-duration: 2s;
+}
+
+.home__title :hover {
+    animation-name: profile;
+    animation-duration: 10s;
+
+}
+
+
+/* ================ End of animations ==================== */
+
 .home__title {
     font-family: 'Poppins', sans-serif;
     display: inline;
@@ -13,7 +66,10 @@ body {
 }
 
 .home__title :hover{
-    color: orange;
+    width: fit-content;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
 }
 
 .logo {
@@ -21,6 +77,8 @@ body {
   justify-content: center;
   margin-right: auto;
   margin-left: auto;
+  margin-top:60px;
+  margin-bottom: 50px;
 } 
 
 .home__links {
@@ -31,6 +89,7 @@ body {
     width: fit-content;
     padding-left: 10px;
     padding-right: 10px;
+    border-radius: 20px;
 }
 
 .about__content {
@@ -45,6 +104,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     margin-left: 20px;
+    border-radius: 20px;
 }
 
 .btn1:hover {
@@ -53,15 +113,12 @@ body {
     border: 2px solid rgb(0, 0, 0);
 }
 
-.profile {
-    text-align: center;
-    color: blue;
-}
 
 .profile__rooms {
     color: rgb(0, 0, 0);
     height: fit-content;
     font-size: large;
+    text-align: center;
 }
 
 .each__chatroom {
