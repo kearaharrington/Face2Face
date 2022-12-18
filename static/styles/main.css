@@ -1,6 +1,6 @@
 
 body{
-    background-color: gray;
+    background-image: url(../../static/imgs/Bground.png);
 }
 
 #logo{
@@ -66,4 +66,31 @@ body{
 
 #leave-btn{
     background-color: rgb(255, 80, 80, 1);
+}
+
+.home__links {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    background-color: rgba(25, 0, 255, 0.231);
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.btn1 {
+    text-decoration: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 20px;
+}
+
+.btn1:hover {
+    background-color: rgb(38, 30, 254);
+    color: white;
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.home__button__container {
+    padding: 5px;
 }
