@@ -158,8 +158,6 @@ def CreateMessage(request, chatroom):
         new_message.save()
         participant_exists = Participant.objects.filter(user_id=user.id)
         if participant_exists:
-        participant_exists = Participant.objects.filter(user_id=user.id)
-        if participant_exists:
             return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
         elif new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
             new_member = Participant.objects.create(user=user)
