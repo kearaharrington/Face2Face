@@ -5,6 +5,11 @@ from django.http import HttpResponseRedirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from main_app.models import Chatroom, Message, Participant
+from agora_token_builder import RtcTokenBuilder
+from django.http import JsonResponse
+import random
+import time
+
 
 # Add LoginForm to this line...
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
@@ -30,6 +35,22 @@ def lobby(request):
 
 def room(request):
     return render(request, 'group/room.html')
+
+def getToken(request):
+    #Build token with uid
+    appId = '2743b5d3f8bd4737a2dff589a32dcaaa'
+    appCertificate = '6b864506c34e492993b91224191dfd4b'
+    channelName = request.GET.get('channel')
+    uid = random.randint(1, 200)
+    expirationTimeInSeconds = 3600 * 200
+    currentTimeStamp = time.time()
+    privilegeExpiredTs = currentTimeStamp + expirationTimeInSeconds
+    role = 1
+    
+    
+    
+    token = RtcTokenBuilder.buildTokenWithUid(appId, appCertificate, channelName, uid, role, privilegeExpiredTs)
+    return JsonResponse({'token':token, 'uid':uid}, safe=False)
 
 @login_required
 def profile(request, username):
