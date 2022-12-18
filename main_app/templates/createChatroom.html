@@ -9,7 +9,16 @@
       <input type="text" name="chatroom" id="chatroom" width="100px" />
       <input type="submit" value="Create Room Now">
   </form>
-</div>
+  {% for chatroom in chatrooms %}
+  <div class='chatroom__container'>
+    <div class='each__chatroom'>
+      <a class='chatroom__btn' href="../message/{{ chatroom.name }}/create">
+        <h3>{{ all_chatrooms.name }}</h3>
+      </a>
+    </div>
+  </div>
+
+{% endfor %}
 
 
 {% endblock %}

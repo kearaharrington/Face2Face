@@ -119,7 +119,6 @@ def chatroom(request, chatroom):
         'user': user,
         'chatroom': chatroom,
     })
-
 @login_required
 def CreateChatroom(request):
     if request.method == 'POST': 
@@ -133,7 +132,9 @@ def CreateChatroom(request):
             new_room.save()
             return redirect(f'/message/{chatroom}/create')
     else: 
-        return render(request, 'createChatroom.html')
+        all_chatrooms = Chatroom.objects.all()
+        print(all_chatrooms)
+        return render(request, 'createChatroom.html', {'all_chatrooms': all_chatrooms})
 
 @login_required
 def CreateMessage(request, chatroom):
@@ -143,8 +144,8 @@ def CreateMessage(request, chatroom):
         text = request.POST['text']
         new_message = Message.objects.create(sender=user, chatroom=chatroom, text=text)
         new_message.save()
-        participants = Participant.objects.all()
-        if any(participant.user_id == user.id for participant in participants):
+        participant_exists = Participant.objects.filter(user_id=user.id)
+        if participant_exists:
             return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
         elif new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
             new_member = Participant.objects.create(user=user)
