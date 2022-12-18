@@ -4,6 +4,15 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+.logo {
+    background-image: url(../../static/imgs/f2f.png);
+    background-position: center;
+    background-size:cover;
+    width: 400px;
+    height: 200px;
+} 
+
+
 #logo{
     display: block;
     width: 100px;
