@@ -76,10 +76,16 @@
           $.ajax({
             type: "GET",
             url: "/getMessages/{{chatroom}}/",
-            success: function (response) {
-              console.log(response);
+            success: function (response, request) {
+              console.log(response, request);
               $("#display").empty();
-              for (let key in response.messages) {
+              for (key in response.messages) {
+                {% comment %} if(response.messages[key].sender_id === request.user.id){
+
+                }else{
+
+                } {% endcomment %}
+                console.log(response.messages[key].user_id)
                 let displayMessage =
                   "<div class='container darker'><b>" +
                   response.messages[key].text +

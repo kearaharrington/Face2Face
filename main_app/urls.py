@@ -20,5 +20,6 @@ urlpatterns = [
     path('room/', views.room),
     path('lobby/', views.lobby),
     path('user/<username>', views.profile, name='profile'),
+    path('get_token/', views.getToken),
 ]
 

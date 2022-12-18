@@ -3,11 +3,11 @@
 
 {% block content %}
 <div class='profile'>
-  <h1>Welcome</h1>
+  <h1>{{ username }}'s Profile</h1>
 
 </div>
 <div class='profile__rooms' align='center'>
-  <h1>{{ username }}'s chatrooms:</h1>
+  <h1>Chatrooms:</h1>
 </div>
   {% for chatroom in chatrooms %}
   <div class='chatroom__container'>

@@ -1,16 +1,29 @@
 const APP_ID = '2743b5d3f8bd4737a2dff589a32dcaaa'
-const CHANNEL = 'main'
-const TOKEN = '007eJxTYPjXbWDitriFo+L/G8cwPpXVmc36T5yeMXfor3rCd0vKfqECg5G5iXGSaYpxmkVSiom5sXmiUUpamqmFZaKxUUpyYmJiDP+85IZARoZclkhWRgYIBPFZGHITM/MYGADpKB2n'
-let UID;
+const CHANNEL = sessionStorage.getItem('room')
+const TOKEN = sessionStorage.getItem('token')
+let UID = Number(sessionStorage.getItem('UID'))
 
 const client = AgoraRTC.createClient({mode:'rtc', codec:'vp8'})
 let localTracks = []
 let remoteUsers = {}
 
 let joinAndDisplayLocalStream = async () => {
-    client.on('user-published', handleUserJoined)
 
-    UID = await client.join(APP_ID, CHANNEL, TOKEN, null)
+    document.getElementById('room-name').innerText = CHANNEL
+
+    client.on('user-published', handleUserJoined)
+    client.on('user-left', handleUserLeft)
+
+    try{
+        console.log("WE ARE CONNECTED")
+        await client.join(APP_ID, CHANNEL, TOKEN, UID)
+    }
+    catch(error){
+        console.log("THE ERROR IS: ",error)
+        window.open('/', '_self')
+    }
+
+    // await client.join(APP_ID, CHANNEL, TOKEN, UID)
 
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
 
@@ -44,5 +57,43 @@ let handleUserJoined = async (user, mediaType) => {
     }
 }
 
+let handleUserLeft = async (user) => {
+    delete remoteUsers[user.uid]
+    document.getElementById(`user-container-${user.uid}`).remove()
+}
+let leaveAndRemoveLocalStream = async () => {
+    for (let i = 0; localTracks.length > i; i++){
+        localTracks[i].stop()
+        localTracks[i].close()
+    }
+
+    await client.leave()
+    window.open('/', '_self')
+}
+
+let toggleCamera = async (e) => {
+    if (localTracks[1].muted){
+        await localTracks[1].setMuted(false)
+        e.target.style.backgroundColor = "#fff"
+    }
+    else{
+        await localTracks[1].setMuted(true)
+        e.target.style.backgroundColor = "rgb(255, 80, 80, 1)"
+    }
+}
+
+let toggleMic = async (e) => {
+    if (localTracks[0].muted){
+        await localTracks[0].setMuted(false)
+        e.target.style.backgroundColor = "#fff"
+    }
+    else{
+        await localTracks[0].setMuted(true)
+        e.target.style.backgroundColor = "rgb(255, 80, 80, 1)"
+    }
+}
 
 joinAndDisplayLocalStream()
+document.getElementById('leave-btn').addEventListener('click', leaveAndRemoveLocalStream)
+document.getElementById('camera-btn').addEventListener('click', toggleCamera)
+document.getElementById('mic-btn').addEventListener('click', toggleMic)
