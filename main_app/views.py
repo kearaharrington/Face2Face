@@ -116,6 +116,19 @@ def CreateChatroom(request):
         return render(request, 'createChatroom.html', {'all_chatrooms': all_chatrooms})
 
 @login_required
+def edit_chatroom(request, chatroom):
+    chatroom = Chatroom.objects.get(name=chatroom)
+    chatroom_name = str(chatroom.name)
+    print(chatroom_name)
+    if request.method == 'GET':
+        return render(request, "edit_chatroom.html", {'chatroom': chatroom})
+    elif request.method == 'POST':
+        name = request.POST['name']
+        chatroom.name = name
+        chatroom.save()
+        return redirect(f'/message/{name}/create/')
+
+@login_required
 def CreateMessage(request, chatroom):
     user = request.user
     chatroom = list(Chatroom.objects.filter(name=chatroom))[0]

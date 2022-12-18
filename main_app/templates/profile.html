@@ -12,7 +12,7 @@
   {% for chatroom in chatrooms %}
   <div class='chatroom__container'>
     <div class='each__chatroom'>
-      <a class='chatroom__btn' href="/getMessages/{{ chatroom.name }}">
+      <a class='chatroom__btn' href="../message/{{ chatroom.name }}/create">
         <h3>{{ chatroom.name }}</h3>
       </a>
     </div>
@@ -20,7 +20,7 @@
 
 {% endfor %}
 {% for membership in memberships %}
-<a href="/getMessages/{{ membership.name }}">
+<a href="../message/{{ membership.name }}/create">
     <h3>{{ membership.name }}</h3>
 </a>
 {% endfor %}
