@@ -138,15 +138,28 @@ def CreateChatroom(request):
 @login_required
 def edit_chatroom(request, chatroom):
     chatroom = Chatroom.objects.get(name=chatroom)
-    chatroom_name = str(chatroom.name)
-    print(chatroom_name)
-    if request.method == 'GET':
+    user = request.user
+    # chatroom_name = str(chatroom.name)
+    # print(chatroom_name)
+    if user == chatroom.creator and request.method == 'GET':
         return render(request, "edit_chatroom.html", {'chatroom': chatroom})
-    elif request.method == 'POST':
+    elif user == chatroom.creator and request.method == 'POST':
         name = request.POST['name']
         chatroom.name = name
         chatroom.save()
         return redirect(f'/message/{name}/create/')
+    else: 
+        return redirect(f'/message/{chatroom.name}/create')
+
+@login_required
+def delete_chatroom(request, chatroom):
+    chatroom = Chatroom.objects.get(name=chatroom)
+    user = request.user
+    if user == chatroom.creator:
+        chatroom.delete()
+        return redirect('profile', username=user.username)
+    else:
+        return redirect('profile', username=user.username)
 
 @login_required
 def CreateMessage(request, chatroom):

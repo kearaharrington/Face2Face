@@ -5,10 +5,11 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('chatroom/create/', views.CreateChatroom, name='createChatroom'),
     path('<str:chatroom>/update/', views.edit_chatroom, name='edit_chatroom'),
+    path('<str:chatroom>/delete/', views.delete_chatroom, name='delete_chatroom'),
     # path('chatroom/<str:chatroom>/', views.chatroom, name='chatroom'),
     path('message/<str:chatroom>/create/', views.CreateMessage, name='create_message'),
     path('getMessages/<str:chatroom>/', views.getMessages, name='getMessages'),
-    path('user/<username>', views.profile, name='profile'),
+    path('user/<username>/', views.profile, name='profile'),
     
     # path('lobby/', views.lobby),
     path('accounts/login/', views.login_view, name='login'),
@@ -19,7 +20,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('room/', views.room),
     path('lobby/', views.lobby),
-    path('user/<username>', views.profile, name='profile'),
     path('get_token/', views.getToken),
 ]
 
