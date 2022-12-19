@@ -9,6 +9,20 @@
         <input type="text" name="name" id="name" width="100px" />
         <input type="submit" value="Update">
     </form>
-  </div>
+    <div>
+      <h4>
+        members:
+      </h4>
+    </div>
+    {% for member in members %}
+        <div class='each__chatroom'>
+          <li> {{ member }} </li>
+        </div>
+        <a class='chatroom__btn' href="{% url 'delete_member' chatroom=chatroom.name member=member %}">
+          <h5>remove member</h5>
+        </a>
+    {% endfor %}
+</div>
+
 
 {% endblock %}

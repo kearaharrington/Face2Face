@@ -76,22 +76,17 @@
           $.ajax({
             type: "GET",
             url: "/getMessages/{{chatroom}}/",
-            success: function (response, request) {
-              console.log(response, request);
+            success: function (response) {
+              console.log(response);
               $("#display").empty();
-              for (key in response.messages) {
-                {% comment %} if(response.messages[key].sender_id === request.user.id){
-
-                }else{
-
-                } {% endcomment %}
-                console.log(response.messages[key].user_id)
+              for (let key in response.messages) {
                 let displayMessage =
                   "<div class='container darker'><b>" +
                   response.messages[key].text +
                   "</b><p>" +
+                  response.messages[key].sender +
                   "</p><span class='time-left'>" +
-                  response.messages[key].created_at.slice(0, 10) +
+                  response.messages[key].created_at.slice(0, 10)+
                   "</span></div>";
                 $("#display").append(displayMessage);
               }
