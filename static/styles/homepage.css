@@ -1,11 +1,12 @@
-/* =========================== Main CSS Code =============================== */
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* =========================== Main CSS Code =============================== */
 
 body {
     background-image: url(../../static/imgs/Bground.png);
     font-family: 'Poppins', sans-serif;
 }
+
 
 .contact__container {
     width: fit-content;
