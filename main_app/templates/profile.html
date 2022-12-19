@@ -4,25 +4,28 @@
 {% block content %}
 <div class='profile'>
   <h1>{{ username }}'s Profile</h1>
-
 </div>
+<div class='profile-img'></div>
 <div class='profile__rooms' align='center'>
-  <h1>Chatrooms:</h1>
-</div>
+  <h3>Created Chatrooms:</h3>
   {% for chatroom in chatrooms %}
   <div class='chatroom__container'>
-    <div class='each__chatroom'>
       <a class='chatroom__btn' href="../message/{{ chatroom.name }}/create">
         <h3>{{ chatroom.name }}</h3>
       </a>
-    </div>
   </div>
+</div>
 
 {% endfor %}
+<div class='profile__rooms' align='center'>
+  <h3>Joined Chatrooms</h3>
 {% for membership in memberships %}
-<a href="../message/{{ membership.name }}/create">
-    <h3>{{ membership.name }}</h3>
-</a>
+<div class='chatroom__container'>
+  <a class='chatroom__btn' href="../message/{{ membership.name }}/create">
+      <h3>{{ membership.name }}</h3>
+  </a>
+</div>
+</div>
 {% endfor %}
 
 {% endblock %}
