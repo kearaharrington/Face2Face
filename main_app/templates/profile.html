@@ -14,13 +14,13 @@
   <div class='chatroom__container'>
     <span class='each__chatroom'>
       <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
-        <h3 class='join__chatroom__btn'>{{ chatroom.name }}</h3>
+        <h3 class='join__chatroom__btn'>Enter ({{ chatroom.name }})</h3>
       </a>
       <a class='chatroom__btn' href="{% url 'edit_chatroom' chatroom=chatroom.name %}">
-        <h5 class='edit'>edit</h5>
+        <h5 class='edit'>edit ({{chatroom.name }})</h5>
       </a>
       <a class='chatroom__btn' href="{% url 'delete_chatroom' chatroom=chatroom.name %}">
-        <h5 class='delete'>delete</h5>
+        <h5 class='delete'>delete {{chatroom.name }}</h5>
       </a>
     </span>
   </div>
@@ -34,7 +34,7 @@
     <div class='chatroom__container'>
       <div class='each__chatroom'>
         <a class='chatroom__btn' href="{% url 'create_message' chatroom=membership.name %}">
-          <h3>{{ membership.name }}</h3>
+          <h3 class='join__chatroom__btn'>Enter {{ membership.name }}</h3>
         </a>
       </div>
     </div>
