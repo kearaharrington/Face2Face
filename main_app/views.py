@@ -138,42 +138,95 @@ def CreateChatroom(request):
 @login_required
 def edit_chatroom(request, chatroom):
     chatroom = Chatroom.objects.get(name=chatroom)
-    chatroom_name = str(chatroom.name)
-    print(chatroom_name)
-    if request.method == 'GET':
-        return render(request, "edit_chatroom.html", {'chatroom': chatroom})
-    elif request.method == 'POST':
+    user = request.user
+    # members = chatroom.members.all()
+    members = list(chatroom.members.all())
+    # return members
+    print('MEMMMMBERS', members)
+    all_members = []
+    for member in members:
+        # one_member = Participant.objects.get(user_id=member.user_id)
+        one_member = User.objects.get(id=member.user_id)
+        all_members.append(one_member)
+    print('MEMBERS', all_members)
+    if user == chatroom.creator and request.method == 'GET':
+        return render(request, "edit_chatroom.html", {'chatroom': chatroom, 'members': all_members})
+    elif user == chatroom.creator and request.method == 'POST':
         name = request.POST['name']
         chatroom.name = name
         chatroom.save()
         return redirect(f'/message/{name}/create/')
+    else: 
+        return redirect(f'/message/{chatroom.name}/create')
+
+@login_required
+def delete_member(request, chatroom, member):
+    chatroom = Chatroom.objects.get(name=chatroom)
+    user = User.objects.get(username=member)
+    member = Participant.objects.get(user_id=user.id)
+    print('member to DELETE', member)
+    members_list = list(chatroom.members.all())
+    print('DELETE MEMBERS', members_list)
+    members_list[:] = (value for value in members_list if value != member)
+    chatroom.members.set(members_list)
+    print('AFTER DELETE', members_list)
+    chatroom.save()
+    return redirect('profile', username=request.user.username)
+
+@login_required
+def delete_chatroom(request, chatroom):
+    chatroom = Chatroom.objects.get(name=chatroom)
+    user = request.user
+    if user == chatroom.creator:
+        chatroom.delete()
+        return redirect('profile', username=user.username)
+    else:
+        return redirect('profile', username=user.username)
 
 @login_required
 def CreateMessage(request, chatroom):
     user = request.user
     chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
+    members = chatroom.members.all()
+    # create new message
     if request.method == 'POST': 
         text = request.POST['text']
         new_message = Message.objects.create(sender=user, chatroom=chatroom, text=text)
         new_message.save()
+        # check if user_id is already associated with participant instance
         participant_exists = Participant.objects.filter(user_id=user.id)
-        if participant_exists:
+        # check to see if participant exists and needs to be added to chatroom instance
+        if participant_exists and new_message.sender != chatroom.creator and participant_exists != members:
+            new_member = Participant.objects.get(user_id=user.id)
+            chatroom.members.add(new_member)
+            chatroom.save()
             return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+        # check to see if participant needs to be created and added to chatroom instance
         elif new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
             new_member = Participant.objects.create(user=user)
             new_member.save()
             chatroom.members.add(new_member)
+            chatroom.save()
+            return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+        else:
             return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
     else: 
         return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
 
+def add_sender(message):
+    sender = User.objects.get(id=message.sender.id)
+    # print('136 This is Sender!', sender.username)
+    return {
+        "sender": sender.username,
+        "text": message.text,
+        "created_at": message.created_at
+    }
+
 
 @login_required
 def getMessages(request, chatroom):
-    
     room_details = Chatroom.objects.get(name=chatroom)
-    messages = Message.objects.filter(chatroom=room_details.id)
-    # users = User.objects.get()
-    # print('this is users!!!!', users)
-    return JsonResponse({"messages":list(messages.values())})
-
+    messages = list(Message.objects.filter(chatroom=room_details.id))
+    messages = list(map(add_sender, messages))
+    # print('These are messages!!', messages)
+    return JsonResponse({"messages":list(messages)})

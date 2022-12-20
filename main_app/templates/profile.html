@@ -7,24 +7,36 @@
 </div>
 <div class='profile-img'></div>
 <div class='profile__rooms' align='center'>
-  <h3>Created Chatrooms:</h3>
-  {% for chatroom in chatrooms %}
-  <div class='chatroom__container'>
-      <a class='chatroom__btn' href="../message/{{ chatroom.name }}/create">
-        <h3>{{ chatroom.name }}</h3>
-      </a>
-  </div>
+  <h1>Your Chatrooms:</h1>
 </div>
 
+{% for chatroom in chatrooms %}
+<div class='chatroom__container'>
+  <div class='each__chatroom'>
+    <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
+      <h3>{{ chatroom.name }}</h3>
+    </a>
+    <a class='chatroom__btn' href="{% url 'edit_chatroom' chatroom=chatroom.name %}">
+      <h5>edit</h5>
+    </a>
+    <a class='chatroom__btn' href="{% url 'delete_chatroom' chatroom=chatroom.name %}">
+      <h5>delete</h5>
+    </a>
+  </div>
+</div>
 {% endfor %}
+
 <div class='profile__rooms' align='center'>
-  <h3>Joined Chatrooms</h3>
+  <h1>Chatrooms You Joined:</h1>
+</div>
+
 {% for membership in memberships %}
 <div class='chatroom__container'>
-  <a class='chatroom__btn' href="../message/{{ membership.name }}/create">
+  <div class='each__chatroom'>
+    <a href="{% url 'create_message' chatroom=membership.name %}">
       <h3>{{ membership.name }}</h3>
-  </a>
-</div>
+    </a>
+  </div>
 </div>
 {% endfor %}
 
