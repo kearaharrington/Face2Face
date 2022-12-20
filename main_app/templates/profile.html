@@ -6,38 +6,39 @@
   <h1>{{ username }}'s Profile</h1>
 </div>
 <div class='profile-img'></div>
-<div class='profile__rooms' align='center'>
+<div class="profile__rooms">
+<div class='profile__room1' align='center'>
   <h1>Your Chatrooms:</h1>
+  
+  {% for chatroom in chatrooms %}
+  <div class='chatroom__container'>
+    <span class='each__chatroom'>
+      <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
+        <h3>{{ chatroom.name }}</h3>
+      </a>
+      <a class='chatroom__btn' href="{% url 'edit_chatroom' chatroom=chatroom.name %}">
+        <h5 class='edit'>edit</h5>
+      </a>
+      <a class='chatroom__btn' href="{% url 'delete_chatroom' chatroom=chatroom.name %}">
+        <h5 class='delete'>delete</h5>
+      </a>
+    </span>
+  </div>
+  {% endfor %}
 </div>
-
-{% for chatroom in chatrooms %}
-<div class='chatroom__container'>
-  <div class='each__chatroom'>
-    <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
-      <h3>{{ chatroom.name }}</h3>
-    </a>
-    <a class='chatroom__btn' href="{% url 'edit_chatroom' chatroom=chatroom.name %}">
-      <h5>edit</h5>
-    </a>
-    <a class='chatroom__btn' href="{% url 'delete_chatroom' chatroom=chatroom.name %}">
-      <h5>delete</h5>
-    </a>
+  
+  <div class='profile__room2' align='center'>
+    <h1 class='joined__chatroom__title'>Chatrooms You Joined:</h1>
+    
+    {% for membership in memberships %}
+    <div class='chatroom__container'>
+      <div class='each__chatroom'>
+        <a class='chatroom__btn' href="{% url 'create_message' chatroom=membership.name %}">
+          <h3>{{ membership.name }}</h3>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
-{% endfor %}
-
-<div class='profile__rooms' align='center'>
-  <h1>Chatrooms You Joined:</h1>
-</div>
-
-{% for membership in memberships %}
-<div class='chatroom__container'>
-  <div class='each__chatroom'>
-    <a href="{% url 'create_message' chatroom=membership.name %}">
-      <h3>{{ membership.name }}</h3>
-    </a>
-  </div>
-</div>
-{% endfor %}
-
-{% endblock %}
+    {% endblock %}
