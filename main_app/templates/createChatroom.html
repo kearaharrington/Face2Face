@@ -6,8 +6,10 @@
   <form id="post-form" method="POST" action="">
       {% csrf_token %}
       <label class='create__chatroom__label'>Create a Chatroom or Join an Existing Chatroom</label>
+      <br/>
       {% comment %}Need to display existing chatrooms to choose from {% endcomment %}
-      <input type="text" name="chatroom" id="chatroom" width="100px" />
+      <input type="text" name="chatroom" id="chatroom" width="100px" align='center/>
+      <br/>
       <input type="submit" value="Create Room Now" class='submit__chatroom'>
   </form>
   {% for chatroom in chatrooms %}
