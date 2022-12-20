@@ -15,7 +15,7 @@
   {% for chatroom in chatrooms %}
   <div class='chatroom__container'>
     <div class='each__chatroom'>
-      <a class='chatroom__btn' href="../message/{{ chatroom.name }}/create">
+      <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
         <h3>{{ chatroom.name }}</h3>
       </a>
     </div>
