@@ -161,6 +161,10 @@ box-shadow: 5px 5px 5px -2px rgba(0,0,0,1);
 box-shadow: 5px 5px 5px -2px rgba(0,0,0,1);
 }
 
+.footer__copyright {
+    color: blue;
+}
+
 .home__title {
     font-family: 'Poppins', sans-serif;
     display: inline;
@@ -279,10 +283,11 @@ box-shadow: 5px 5px 5px -2px rgba(0,0,0,1);
 
 .profile__rooms {
     margin-top: 50px;
+    display: flex;
+    width: auto;
 }
 
 .profile__room1 {
-    display: inline-block;
     color: rgb(255, 255, 255);
     border: 2px solid black;
     height: 500px;
@@ -290,7 +295,7 @@ box-shadow: 5px 5px 5px -2px rgba(0,0,0,1);
     text-align: center;
     background: rgb(0,0,0);
     background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(87,87,87,1) 50%, rgba(0,0,0,0.7203475140056023) 100%);
-    margin-left: 30%;
+    margin-left: auto;
     width: fit-content;
     padding-left: 20px;
     padding-right: 20px;
@@ -299,21 +304,20 @@ box-shadow: 5px 5px 5px -2px rgba(0,0,0,1);
     
 }
 .profile__room2 {
-    display: inline-block;
     color: rgb(0, 0, 0);
     border: 2px solid black;
     height: 500px;
     font-size: large;
     text-align: center;
     background-color: rgba(46, 46, 46, 0.4);
-    margin-left: 5px;
     width: fit-content;
     padding-left: 20px;
     padding-right: 20px;
     overflow-y: scroll;
     scrollbar-color: black;
     border-radius: 10px;
-    
+    margin-right: auto;
+    margin-left: 10px;
 }
 
 .rooms__container {
