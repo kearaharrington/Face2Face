@@ -10,7 +10,6 @@ from django.http import JsonResponse
 import random
 import time
 
-
 # Add LoginForm to this line...
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 # ...and add the following line...
