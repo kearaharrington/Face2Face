@@ -13,6 +13,10 @@
       #display{
         border-style: solid;
         border-color: rgb(150, 147, 147);
+        background-color: #f2f2f2;
+        padding: 20px;
+        overflow-y: scroll;
+        max-height: 500px;
       }
       .container {
         border: 2px solid #dedede;
@@ -72,6 +76,10 @@
         width: 500px;
         border-radius: 0px 0px 12px 12px;
       }
+      .padding-box {
+        text-align:justify
+      }
+  
 
     </style>
     {% endblock %}
@@ -98,11 +106,11 @@
               $("#display").empty();
               for (let key in response.messages) {
                 let displayMessage =
-                  "<div class='box container darker'><b>" +
+                  "<div class='padding-box box container darker'><b>" +
                   response.messages[key].sender.toUpperCase() +
                   "</b><p class='container font'>" +
                    response.messages[key].text +
-                  "</p><span class='darker'>" +
+                  "</p><span class='padding-box darker'>" +
                   response.messages[key].created_at.slice(0, 10)+
                   "</span></div>";
                 $("#display").append(displayMessage);
@@ -156,6 +164,8 @@
       .formBox {
         background-color: #f2f2f2;
         padding: 20px;
+        overflow-y: scroll;
+        max-height: 500px;
       }
 
  

@@ -10,23 +10,26 @@
 <div class="form login-box">
   <form id="post-form" method="POST" action="">
     {% csrf_token %}
-    <div class="user-box">
-      <input type="text" name="chatroom" id="chatroom" width="100px" />
-      <label>Create a Chatroom or Join an Existing Chatroom</label>
-    </div>
-      <span></span>
-      <span></span>
-        <a class="tag"><input class="enter" type="submit" value="Entering this Room"></a>
-
-      {% for chatroom in chatrooms %}
-      <div class=''>
-        <div class=''>
-          <a class='chatroom__btn' href="/message/{{ chatroom.name }}/create">
-            <h3>{{ chatroom.name }}</h3>
-          </a>
-        </div>
+    <div class="scroll">
+      <br/>
+      <div class="user-box">
+        <input type="text" name="chatroom" id="chatroom" width="100px" />
+        <label>Create a Chatroom or Join an Existing Chatroom</label>
       </div>
-      {% endfor %}
+        <span></span>
+        <span></span>
+          <a class="tag"><input class="enter" type="submit" value="Entering this Room"></a>
+
+        {% for chatroom in chatrooms %}
+        <div class=''>
+          <div class=''>
+            <a class='chatroom__btn' href="/message/{{ chatroom.name }}/create">
+              <h3>{{ chatroom.name }}</h3>
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
   </form>
 </div>
 

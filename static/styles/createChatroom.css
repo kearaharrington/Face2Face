@@ -10,9 +10,9 @@ body {
 
 .login-box {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
-  width: 400px;
+  width: 500px;
   padding: 40px;
   transform: translate(-50%, -50%);
   background: rgba(0,0,0,.5);
@@ -181,4 +181,9 @@ body {
   margin-left: auto;
   margin-top: 400px;
   margin-bottom: 50px;
-} 
+}
+
+.scroll {
+  overflow-y: scroll;
+  max-height: 500px;
+}
