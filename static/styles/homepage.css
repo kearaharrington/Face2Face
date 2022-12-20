@@ -77,7 +77,8 @@ body {
 }
 
 .chatroom__container {
-    background-color: rgba(0, 0, 0, 0.29);
+    background-color: rgba(64, 255, 0, 0.29);
+    border: 2px solid black;
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
@@ -85,11 +86,20 @@ body {
     padding-right: 10px;
     border-radius: 10px;
     padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 
 .chatroom__btn {
-    color: rgb(255, 255, 255);
+    color: rgb(13, 0, 255);
+    text-decoration: none;
+}
+
+.join__chatroom__btn {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+
 }
 
 .edit {
@@ -132,27 +142,25 @@ body {
     display: inline-block;
     color: rgb(0, 0, 0);
     border: 2px solid black;
-    height: 300px;
+    height: 500px;
     font-size: large;
     text-align: center;
-    background-color: rgba(0, 0, 255, 0.425);
+    background-color: rgba(115, 115, 115, 0.225);
     margin-left: 30%;
     width: fit-content;
     padding-left: 20px;
     padding-right: 20px;
     overflow-y: scroll;
-    overflow: auto;
-    scrollbar-color: black;
     
 }
 .profile__room2 {
     display: inline-block;
     color: rgb(0, 0, 0);
     border: 2px solid black;
-    height: 300px;
+    height: 500px;
     font-size: large;
     text-align: center;
-    background-color: rgba(0, 0, 255, 0.425);
+    background-color: rgba(115, 115, 115, 0.225);
     margin-left: 5px;
     width: fit-content;
     padding-left: 20px;
@@ -223,6 +231,7 @@ body {
     padding-right: 10px;
     margin-left: 5px;
 }
+
 /* =========================== End of Main CSS Code =============================== */
 
 

@@ -14,7 +14,7 @@
   <div class='chatroom__container'>
     <span class='each__chatroom'>
       <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
-        <h3>{{ chatroom.name }}</h3>
+        <h3 class='join__chatroom__btn'>{{ chatroom.name }}</h3>
       </a>
       <a class='chatroom__btn' href="{% url 'edit_chatroom' chatroom=chatroom.name %}">
         <h5 class='edit'>edit</h5>
