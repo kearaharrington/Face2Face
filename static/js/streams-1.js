@@ -20,7 +20,7 @@ let joinAndDisplayLocalStream = async () => {
     }
     catch(error){
         console.log("THE ERROR IS: ",error)
-        window.open('/', '_self')
+        // window.open('/', '_self')
     }
 
     // await client.join(APP_ID, CHANNEL, TOKEN, UID)
