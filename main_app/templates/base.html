@@ -5,6 +5,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Face2Face</title>
+    <link rel="icon" href="../../static/imgs/icon.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     {% comment %} <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/main.css' %}"> {% endcomment %}
     <link rel='stylesheet' type='text/css' media='screen' href="{% static '/styles/homepage.css' %}">
@@ -51,7 +52,7 @@
           </div>
         {% else %}
          <div class='home__button__container'>
-           <a href='/accounts/login'>Login</a>
+           <a href='/accounts/login' class='btn1'>Login</a>
          </div>
          <div class='home__button__container'>
            <a href='/signup' class='btn1'> Signup </a>
@@ -61,6 +62,10 @@
     {% block content %}
     
     {% endblock content %}
+
+    <div className="footer__copyright">
+      <small>&copy; FACE2FACE</small>
+    </div>
 </body>
 <!-- <script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.8.0.js' %}"></script> -->
 

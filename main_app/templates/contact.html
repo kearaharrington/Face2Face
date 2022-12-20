@@ -3,11 +3,22 @@
 {% block content %}
 <div class='logo'></div>
 <div class='home-title' align="center">
-  <h2>Face2Face</h2>
   <h1> Contact Face2Face Team!</h1>
   <p> get in contact with us today!</p>
 </div>
 <div class='contact__container'>
+
+  <form action="https://formsubmit.co/calvickauer@gmail.com" method="POST" >
+    <input name="name" class=" effect-1 m-1" type="text" id="name" placeholder=" Your Name" required>
+    <span class="Focus-border"></span>
+    <input name="email"  class=" effect-1 m-1" type="text" placeholder=" Your Email" id="Email" required>
+    <span class="Focus-border"></span>
+ <div class="row">
+   <textarea name="text" id="contact" cols="20" rows="4" class=" effect-1 m-1" placeholder="Your Message Here..."></textarea>
+   <span class="Focus-border"></span>
+ </div>
+    <button type="submit" class="contact__btn">Send Message</button>  
+ </form>
 
 </div>
 
