@@ -133,7 +133,7 @@ def CreateChatroom(request):
             return redirect(f'/message/{chatroom}/create')
     else: 
         all_chatrooms = Chatroom.objects.all()
-        return render(request, 'createChatroom.html', {'all_chatrooms': all_chatrooms})
+        return render(request, 'createChatroom.html', {'chatrooms': all_chatrooms})
 
 @login_required
 def edit_chatroom(request, chatroom):
