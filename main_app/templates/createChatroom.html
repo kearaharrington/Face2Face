@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block additionalStyles %}
+  <link rel='stylesheet' href="{% static '/styles/createChatroom.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class='logo'></div>
-<div class='chat-create chat-enter'> 
+
+<div class="form login-box">
   <form id="post-form" method="POST" action="">
-      {% csrf_token %}
-      <label class='create__chatroom__label'>Create a Chatroom or Join an Existing Chatroom</label>
-      <br/>
-      {% comment %}Need to display existing chatrooms to choose from {% endcomment %}
-      <input type="text" name="chatroom" id="chatroom" width="100px" align='center/>
-      <br/>
-      <input type="submit" value="Create Room Now" class='submit__chatroom'>
-  </form>
-  {% for chatroom in chatrooms %}
-  <div class='chatroom__container'>
-    <div class='each__chatroom'>
-      <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
-        <h3>{{ chatroom.name }}</h3>
-      </a>
+    {% csrf_token %}
+    <div class="user-box">
+      <input type="text" name="chatroom" id="chatroom" width="100px" />
+      <label>Create a Chatroom or Join an Existing Chatroom</label>
     </div>
-  </div>
+      <span></span>
+      <span></span>
+        <a class="tag"><input class="enter" type="submit" value="Entering this Room"></a>
 
-{% endfor %}
-
+      {% for chatroom in chatrooms %}
+      <div class=''>
+        <div class=''>
+          <a class='chatroom__btn' href="/message/{{ chatroom.name }}/create">
+            <h3>{{ chatroom.name }}</h3>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+  </form>
+</div>
 
 {% endblock %}

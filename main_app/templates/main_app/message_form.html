@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% load static %}
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% block content %}
     <style>
       body {
         margin: 0 auto;
-        max-width: 800px;
+        max-width: 1300px;
         padding: 0 20px;
       }
 
@@ -15,11 +16,16 @@
         border-radius: 5px;
         padding: 10px;
         margin: 10px 0;
+        
       }
 
       .darker {
         border-color: #ccc;
-        background-color: #ddd;
+        background-color: rgb(180, 177, 177);
+      }
+      .font {
+        font-style: italic;
+        
       }
 
       .container::after {
@@ -56,9 +62,10 @@
       }
       .headTwo {
         text-align: center;
-        color: Blue;
+        color: rgba(73, 43, 226, 0.825);
       }
     </style>
+
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -66,10 +73,10 @@
     ></script>
   </head>
   <body>
-    <h2 class="header">Face2Face ChatRoom</h2>
+    <h2 class="header">Welcome to the Face2Face Chatroom</h2>
     <h2 class="headTwo">{{chatroom}}</h2>
 
-    <div id="display"></div>
+    <div id="display">
     <script>
       $(document).ready(function () {
         setInterval(function () {
@@ -82,10 +89,10 @@
               for (let key in response.messages) {
                 let displayMessage =
                   "<div class='container darker'><b>" +
-                  response.messages[key].text +
-                  "</b><p>" +
-                  response.messages[key].sender +
-                  "</p><span class='time-left'>" +
+                  response.messages[key].sender.toUpperCase() +
+                  "</b><p class='container font'>" +
+                   response.messages[key].text +
+                  "</p><span class='darker'>" +
                   response.messages[key].created_at.slice(0, 10)+
                   "</span></div>";
                 $("#display").append(displayMessage);
@@ -98,7 +105,7 @@
         }, 1000);
       });
     </script>
-
+    </div>
 
     <div class="container">
       <style>
@@ -122,6 +129,9 @@
           border: none;
           border-radius: 4px;
           cursor: pointer;
+          /* max-width: 1000px; */
+          /* position: absolute;
+          left: 25%; */
         }
 
         input[type="submit"]:hover {
@@ -133,6 +143,7 @@
           background-color: #f2f2f2;
           padding: 20px;
         }
+        
       </style>
 
       <form id="post-form" method="post">
@@ -151,8 +162,9 @@
           id="chatroom_name"
           value="{{chatroom.name}}"
         />
-        <input type="submit" value="Send" />
+        <input class="send-box" type="submit" value="Send" />
       </form>
     </div>
+    {% endblock %}
   </body>
 </html>
