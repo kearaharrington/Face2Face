@@ -8,19 +8,19 @@
 <div class='profile-img'></div>
 <div class="profile__rooms">
 <div class='profile__room1' align='center'>
-  <h1>Your Chatrooms:</h1>
+  <h1>Your Chatrooms</h1>
   
   {% for chatroom in chatrooms %}
   <div class='chatroom__container'>
     <span class='each__chatroom'>
       <a class='chatroom__btn' href="{% url 'create_message' chatroom=chatroom.name %}">
-        <h3 class='join__chatroom__btn'>Enter ({{ chatroom.name }})</h3>
+        <h3 class='join__chatroom__btn'>Enter: {{ chatroom.name }}</h3>
       </a>
       <a class='chatroom__btn' href="{% url 'edit_chatroom' chatroom=chatroom.name %}">
-        <h5 class='edit'>edit ({{chatroom.name }})</h5>
+        <h5 class='edit'>Edit: {{chatroom.name }}</h5>
       </a>
       <a class='chatroom__btn' href="{% url 'delete_chatroom' chatroom=chatroom.name %}">
-        <h5 class='delete'>delete {{chatroom.name }}</h5>
+        <h5 class='delete'>Delete: {{chatroom.name }}</h5>
       </a>
     </span>
   </div>
@@ -28,13 +28,13 @@
 </div>
   
   <div class='profile__room2' align='center'>
-    <h1 class='joined__chatroom__title'>Chatrooms You Joined:</h1>
+    <h1 class='joined__chatroom__title'>Joined Chatrooms</h1>
     
     {% for membership in memberships %}
     <div class='chatroom__container'>
       <div class='each__chatroom'>
         <a class='chatroom__btn' href="{% url 'create_message' chatroom=membership.name %}">
-          <h3 class='join__chatroom__btn'>Enter {{ membership.name }}</h3>
+          <h3 class='join__chatroom__btn'>Enter: {{ membership.name }}</h3>
         </a>
       </div>
     </div>
