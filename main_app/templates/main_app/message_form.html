@@ -1,39 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block additionalStyles %}
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    {% block content %}
     <style>
       body {
         margin: 0 auto;
         max-width: 1300px;
         padding: 0 20px;
+        max-width: fit-content;
       }
-
+      #display{
+        border-style: solid;
+        border-color: rgb(150, 147, 147);
+      }
       .container {
         border: 2px solid #dedede;
-        background-color: transparent;
+        background-color: #f1f1f1;
         border-radius: 5px;
         padding: 10px;
         margin: 10px 0;
-        
       }
-
       .darker {
         border-color: #ccc;
         background-color: rgb(180, 177, 177);
       }
       .font {
         font-style: italic;
-        
+        text-align: center;
       }
-
       .container::after {
         content: "";
         clear: both;
         display: table;
       }
-
       .container img {
         float: left;
         max-width: 60px;
@@ -64,8 +64,18 @@
         text-align: center;
         color: rgba(73, 43, 226, 0.825);
       }
-    </style>
+      .inputSend {
+        margin: auto;
+        padding: 20px;
+        font-size: 20px;
+        font-family: 'Sarabun', sans-serif;
+        width: 500px;
+        border-radius: 0px 0px 12px 12px;
+      }
 
+    </style>
+    {% endblock %}
+    {% block content %}
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -88,7 +98,7 @@
               $("#display").empty();
               for (let key in response.messages) {
                 let displayMessage =
-                  "<div class='container darker'><b>" +
+                  "<div class='box container darker'><b>" +
                   response.messages[key].sender.toUpperCase() +
                   "</b><p class='container font'>" +
                    response.messages[key].text +
@@ -141,30 +151,39 @@
         div {
           border-radius: 5px;
           background-color: transparent;
-          
         }
-        
-      </style>
+      
+      .formBox {
+        background-color: #f2f2f2;
+        padding: 20px;
+      }
 
-      <form id="post-form" method="post">
-        {% csrf_token %}
-        <input type="hidden" name="user_id" id="user_id" value="{{user.id}}" />
-        <input
-          type="hidden"
-          name="chatroom_id"
-          id="chatroom_id"
-          value="{{chatroom.id}}"
-        />
-        <input type="text" name="text" id="text" width="100px" />
-        <input
-          type="hidden"
-          name="chatroom_name"
-          id="chatroom_name"
-          value="{{chatroom.name}}"
-        />
-        <input class="send-box" type="submit" value="Send" />
-      </form>
+ 
+      </style>
+      <div class="formBox">
+        <form id="post-form" class="form-box"method="post">
+          {% csrf_token %}
+          <div class="inputSend">
+            <input type="hidden" name="user_id" id="user_id" value="{{user.id}}" />
+            <input
+              type="hidden"
+              name="chatroom_id"
+              id="chatroom_id"
+              value="{{chatroom.id}}"
+            />
+            <input type="text" name="text" id="text" width="100px" />
+            <input
+              type="hidden"
+              name="chatroom_name"
+              id="chatroom_name"
+              value="{{chatroom.name}}"
+            />
+            <input class="send-box" type="submit" value="Send" />
+          </div>
+        </form>
+      </div>
     </div>
-    {% endblock %}
+    
   </body>
+  {% endblock %}
 </html>
