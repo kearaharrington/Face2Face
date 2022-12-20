@@ -5,13 +5,13 @@
 <div class='chat-create chat-enter'> 
     <form id="post-form" method="POST">
         {% csrf_token %}
-        <label>Edit Chatroom</label>
+        <label>edit name:</label>
         <input type="text" name="name" id="name" width="100px" />
-        <input type="submit" value="Update">
+        <input type="submit" value="update">
     </form>
     <div>
       <h4>
-        members:
+        manage members:
       </h4>
     </div>
     {% for member in members %}
