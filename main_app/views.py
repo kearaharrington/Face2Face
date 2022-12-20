@@ -60,7 +60,7 @@ def profile(request, username):
     if member_exists:
         member = Participant.objects.get(user_id=user_id)
         memberships = member.chatroom_set.all()
-        return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms, 'memberships': memberships})
+        return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms, 'memberships': memberships,})
     else:
         return render(request, 'profile.html', {'username': username, 'chatrooms': chatrooms})
 
