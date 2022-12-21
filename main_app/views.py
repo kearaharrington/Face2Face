@@ -123,7 +123,6 @@ def CreateChatroom(request):
     if request.method == 'POST': 
         chatroom = request.POST['chatroom']
         creator = request.user
-        print('THIS IS CHATROOM!!', chatroom)
         if Chatroom.objects.filter(name=chatroom).exists():
             return redirect(f'/message/{chatroom}/create')
         else:
@@ -141,13 +140,11 @@ def edit_chatroom(request, chatroom):
     # members = chatroom.members.all()
     members = list(chatroom.members.all())
     # return members
-    print('MEMMMMBERS', members)
     all_members = []
     for member in members:
         # one_member = Participant.objects.get(user_id=member.user_id)
         one_member = User.objects.get(id=member.user_id)
         all_members.append(one_member)
-    print('MEMBERS', all_members)
     if user == chatroom.creator and request.method == 'GET':
         return render(request, "edit_chatroom.html", {'chatroom': chatroom, 'members': all_members})
     elif user == chatroom.creator and request.method == 'POST':
@@ -163,12 +160,9 @@ def delete_member(request, chatroom, member):
     chatroom = Chatroom.objects.get(name=chatroom)
     user = User.objects.get(username=member)
     member = Participant.objects.get(user_id=user.id)
-    print('member to DELETE', member)
     members_list = list(chatroom.members.all())
-    print('DELETE MEMBERS', members_list)
     members_list[:] = (value for value in members_list if value != member)
     chatroom.members.set(members_list)
-    print('AFTER DELETE', members_list)
     chatroom.save()
     return redirect('profile', username=request.user.username)
 
@@ -214,7 +208,6 @@ def CreateMessage(request, chatroom):
 
 def add_sender(message):
     sender = User.objects.get(id=message.sender.id)
-    # print('136 This is Sender!', sender.username)
     return {
         "sender": sender.username,
         "text": message.text,
@@ -227,5 +220,4 @@ def getMessages(request, chatroom):
     room_details = Chatroom.objects.get(name=chatroom)
     messages = list(Message.objects.filter(chatroom=room_details.id))
     messages = list(map(add_sender, messages))
-    # print('These are messages!!', messages)
     return JsonResponse({"messages":list(messages)})
