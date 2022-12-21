@@ -18,11 +18,11 @@
       </div>
         <span></span>
         <span></span>
-          <a class="tag"><input class="enter" type="submit" value="Entering this Room"></a>
+          <a class="tag"><input class="enter" type="submit" value="Enter Room"></a>
 
         {% for chatroom in chatrooms %}
         <div class=''>
-          <div class=''>
+          <div class='chatrooms__all'>
             <a class='chatroom__btn' href="/message/{{ chatroom.name }}/create">
               <h3>{{ chatroom.name }}</h3>
             </a>

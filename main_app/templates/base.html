@@ -9,32 +9,15 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     {% block additionalStyles %}
     {% endblock %}
-    {% comment %} <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/main.css' %}"> {% endcomment %}
     <link rel='stylesheet' type='text/css' media='screen' href="{% static '/styles/homepage.css' %}">
-    {% comment %} <link rel='stylesheet' type='text/css' href='../static/styles/main.css'> {% endcomment %}
 </head>
 <body>
-  {% comment %} <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><a href="/cats">View All Cats</a></li>
-      <li class="breadcrumb-item active" aria-current="page"><a href="/cats/create">Create Cat</a></li>
-    {% if user.is_authenticated %}
-        <li class="breadcrumb-item active" aria-current="page"><a href="/user/{{user}}">{{user}}'s Profile</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'logout' %}">Logout</a></li>
-    {% else %}
-        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'login' %}">Login</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'signup' %}">Signup</a></li>
-    {% endif %}
-    </ol>
-  </nav> 
-     {% endcomment %}
      <div class='home__links'>
         <div class='home__button__container'>
           <a href='/' class='btn1'> Home </a>
         </div>
          <div class='home__button__container'>
-           <a href='/chatroom/create' class='btn1'> Create Chatroom </a>
+           <a href='/chatroom/create' class='btn1'> Create or Join Chatroom </a>
          </div>
          <div class='home__button__container'>
            <a href='/lobby' class='btn1'> Video Chat </a>
@@ -65,11 +48,11 @@
     
     {% endblock content %}
 
-    <div className="footer__copyright">
-      <small>&copy; FACE2FACE</small>
-    </div>
-</body>
-<!-- <script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.8.0.js' %}"></script> -->
-
-
-</html>
+  </body>
+  <!-- <script type="text/javascript" src="{% static 'assets/AgoraRTC_N-4.8.0.js' %}"></script> -->
+  
+  
+  </html>
+  {% comment %} <div className="footer__copyright">
+    <small>&copy; FACE2FACE</small>
+  </div> {% endcomment %}
