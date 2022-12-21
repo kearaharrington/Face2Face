@@ -21,4 +21,35 @@
 
 #### ![image](https://user-images.githubusercontent.com/107300143/208800342-e9d2167a-d069-4152-9bd9-23d14bec611d.png)
 
+### Some notable codes
+#### Fetching Messages "GET"
+    <script>
+      $(document).ready(function () {
+        setInterval(function () {
+          $.ajax({
+            type: "GET",
+            url: "/getMessages/{{chatroom}}/",
+            success: function (response) {
+              console.log(response);
+              $("#display").empty();
+              for (let key in response.messages) {
+                let displayMessage =
+                  "<div class='padding-box box container darker'><b>" +
+                  response.messages[key].sender.toUpperCase() +
+                  "</b><p class='container font'>" +
+                   response.messages[key].text +
+                  "</p><span class='padding-box darker'>" +
+                  response.messages[key].created_at.slice(0, 10)+
+                  "</span></div>";
+                $("#display").append(displayMessage);
+              }
+            },
+            error: function (response) {
+              alert("Your message has not been sent, An Error");
+            },
+          });
+        }, 1000);
+      });
+    </script>
+    
  
