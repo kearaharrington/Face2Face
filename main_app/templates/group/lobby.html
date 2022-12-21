@@ -16,9 +16,9 @@
         <div class="form-field">
             <input type="text" name="room" placeholder="Enter a room name" style="text-transform: uppercase;">
         </div>
-        <div class="form-field">
+        {% comment %} <div class="form-field">
             <input type="text" name="username" placeholder="Enter your username" style="text-transform: uppercase;">
-        </div>
+        </div> {% endcomment %}
         <div class="join">
             <input type="submit" value="Join Stream" class='join__stream'>
         </div>
@@ -30,7 +30,7 @@
     let handleSubmit = async (e) => {
         e.preventDefault()
         let room = e.target.room.value.toUpperCase()
-        let name = e.target.username.value
+        {% comment %} let name = e.target.username.value {% endcomment %}
 
         
         let response = await fetch(`/get_token/?channel=${room}`)
