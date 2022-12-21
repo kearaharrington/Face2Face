@@ -85,31 +85,60 @@ pip3 install agora_token_builder
 <br/>
 
 ### Models
+```python
 
+class Participant(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+class Chatroom(models.Model):
+    name = models.CharField(max_length=100)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    members = models.ManyToManyField(Participant, blank=True)
+    
+    def __str__(self):
+        return self.name
+    
+class Message(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    chatroom = models.ForeignKey(Chatroom, on_delete=models.CASCADE)
+    text = models.CharField(max_length=300)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.text
+    
+class Video_Chat(models.Model):
+    participants = models.ManyToManyField(Participant)
+    date = models.DateTimeField(auto_now_add=True)
+```
+note: the Video_Chat model is not currently in use.
 
 ### URL Paths
-|url|view|
-|'' | views.index|
-|'chatroom/create/'| views.CreateChatroom|
-|'<str:chatroom>/update/'| views.edit_chatroom|
-|'<str:chatroom>/delete/'| views.delete_chatroom|
-|'<str:chatroom>/<str:member>/delete/'| views.delete_member|
-|'message/<str:chatroom>/create/'| views.CreateMessage|
-|'getMessages/<str:chatroom>/'| views.getMessages|
-|'user/<username>/'| views.profile|
-|'accounts/login/'| views.login_view|
-|'logout/'| views.logout_view|
-|'signup/'| views.signup_view|
-|'group/'| views.chatroom|
-|'about/'| views.about|
-|'contact/'| views.contact|
-|'room/'| views.room|
-|'lobby/'| views.lobby|
-|'get_token/'| views.getToken|
+```jsx
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('chatroom/create/', views.CreateChatroom, name='createChatroom'),
+    path('<str:chatroom>/update/', views.edit_chatroom, name='edit_chatroom'),
+    path('<str:chatroom>/delete/', views.delete_chatroom, name='delete_chatroom'),
+    path('<str:chatroom>/<str:member>/delete/', views.delete_member, name='delete_member'),
+    path('message/<str:chatroom>/create/', views.CreateMessage, name='create_message'),
+    path('getMessages/<str:chatroom>/', views.getMessages, name='getMessages'),
+    path('user/<username>/', views.profile, name='profile'),
+    path('accounts/login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
+    path('signup/', views.signup_view, name='signup'),
+    path('group/', views.chatroom, name='chat_room'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('room/', views.room),
+    path('lobby/', views.lobby),
+    path('get_token/', views.getToken),
+]
+```
 
 ### Code:
 examples from main_app>views.py:
-```python
+```jsx
 @login_required
 def CreateChatroom(request):
     if request.method == 'POST': 
