@@ -3,11 +3,6 @@
 Face2Face allows users to create and join virtual meeting rooms where they can communicate with each other using video, audio and instant messaging.
 
 
-# Face2Face App
-
-Visit Face2Face app website at: <a href=""> Face2Face</a>
-<hr />
-
 ## Getting Started
 
 `1` `Fork` & `Clone` this repo to your local computer.
@@ -275,5 +270,6 @@ def CreateMessage(request, chatroom):
 - [ ] make chatrooms private
 - [ ] view all live video chats
 - [ ] save video chat history to database
+- [ ] add feature to chatroom/create page to filter out chatrooms the logged in user created or that they are already a member of
 
 ```
