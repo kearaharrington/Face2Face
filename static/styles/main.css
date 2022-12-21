@@ -13,7 +13,6 @@ body{
     height: 200px;
 } 
 
-
 #logo{
     display: block;
     width: 100px;
@@ -207,6 +206,34 @@ body{
     font-size: 20px;
 }
 
+.join__stream {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    color: rgba(73, 43, 226, 0.825);
+    background-color: #b3acb3c9;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 10px;
+    margin-left: 100px;
+    letter-spacing: 4px;
+    border-style: none;
+}
+
+.join__stream:hover {
+    background: rgba(73, 43, 226, 0.825);
+    color: rgba(255, 255, 255, 0.658);
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(73, 43, 226, 0.825),
+                0 0 25px rgba(73, 43, 226, 0.825),
+                0 0 50px rgba(73, 43, 226, 0.825),
+                0 0 100px rgba(73, 43, 226, 0.825);
+}
+
+
 .form-field{
     margin:20px;
 }
@@ -222,10 +249,11 @@ body{
     border-radius: 5px;
     padding: 10px;
     box-sizing: border-box;
+  
 }
 
 .form-field input[type='submit']{
-    background-color: purple;
+    background-color: rgb(9, 128, 0);
     border: none;
     color: white;
 
