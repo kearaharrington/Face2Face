@@ -127,6 +127,8 @@ pip3 install agora_token_builder
 
 # Face2Face Future Improvements:
 ```
-- [ ] Mark journeys as complete/expired after the date passes
+- [ ] make chatrooms private
+- [ ] view all live video chats
+- [ ] save video chat history to database
 
 ```
