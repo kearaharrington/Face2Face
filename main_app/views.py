@@ -137,12 +137,9 @@ def CreateChatroom(request):
 def edit_chatroom(request, chatroom):
     chatroom = Chatroom.objects.get(name=chatroom)
     user = request.user
-    # members = chatroom.members.all()
     members = list(chatroom.members.all())
-    # return members
     all_members = []
     for member in members:
-        # one_member = Participant.objects.get(user_id=member.user_id)
         one_member = User.objects.get(id=member.user_id)
         all_members.append(one_member)
     if user == chatroom.creator and request.method == 'GET':

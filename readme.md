@@ -108,7 +108,71 @@ pip3 install agora_token_builder
 |'get_token/'| views.getToken|
 
 ### Code:
-```jsx
+examples from main_app>views.py:
+```python
+@login_required
+def CreateChatroom(request):
+    if request.method == 'POST': 
+        chatroom = request.POST['chatroom']
+        creator = request.user
+        if Chatroom.objects.filter(name=chatroom).exists():
+            return redirect(f'/message/{chatroom}/create')
+        else:
+            new_room = Chatroom.objects.create(name=chatroom, creator=creator)
+            new_room.save()
+            return redirect(f'/message/{chatroom}/create')
+    else: 
+        all_chatrooms = Chatroom.objects.all()
+        return render(request, 'createChatroom.html', {'chatrooms': all_chatrooms})
+
+@login_required
+def edit_chatroom(request, chatroom):
+    chatroom = Chatroom.objects.get(name=chatroom)
+    user = request.user
+    members = list(chatroom.members.all())
+    all_members = []
+    for member in members:
+        one_member = User.objects.get(id=member.user_id)
+        all_members.append(one_member)
+    if user == chatroom.creator and request.method == 'GET':
+        return render(request, "edit_chatroom.html", {'chatroom': chatroom, 'members': all_members})
+    elif user == chatroom.creator and request.method == 'POST':
+        name = request.POST['name']
+        chatroom.name = name
+        chatroom.save()
+        return redirect(f'/message/{name}/create/')
+    else: 
+        return redirect(f'/message/{chatroom.name}/create')
+
+@login_required
+def CreateMessage(request, chatroom):
+    user = request.user
+    chatroom = list(Chatroom.objects.filter(name=chatroom))[0]
+    members = chatroom.members.all()
+    # create new message
+    if request.method == 'POST': 
+        text = request.POST['text']
+        new_message = Message.objects.create(sender=user, chatroom=chatroom, text=text)
+        new_message.save()
+        # check if user_id is already associated with participant instance
+        participant_exists = Participant.objects.filter(user_id=user.id)
+        # check to see if participant exists and needs to be added to chatroom instance
+        if participant_exists and new_message.sender != chatroom.creator and participant_exists != members:
+            new_member = Participant.objects.get(user_id=user.id)
+            chatroom.members.add(new_member)
+            chatroom.save()
+            return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+        # check to see if participant needs to be created and added to chatroom instance
+        elif new_message.sender != chatroom.creator and new_message.sender != chatroom.members:
+            new_member = Participant.objects.create(user=user)
+            new_member.save()
+            chatroom.members.add(new_member)
+            chatroom.save()
+            return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+        else:
+            return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
+    else: 
+        return render(request, 'main_app/message_form.html', {'user': user, 'chatroom': chatroom})
 
 ```
 
